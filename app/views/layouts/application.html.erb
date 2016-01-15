@@ -19,7 +19,7 @@
           <span class="icon-bar"></span>
         </button>
         <a href="#" class="navbar-brand">educateU</a>
-          <% if session[:user_id]%>
+          <% if user_signed_in? %>
             <p class="navbar-text">User logged in: <strong><%= current_user.username %></strong></p>
           <% end %>
       </div>
@@ -28,8 +28,10 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><%= link_to 'Home', root_path %></li>
-          <% if session[:user_id]%>
+          <% if user_signed_in? %>
             <li><%= link_to 'Profile', current_user %></li>
+          <% end %>
+            <% if false %>
             <%= form_tag search_path, :method => 'get', :enforce_utf8 => false, class:'navbar-form navbar-left' do %>
               <div class="form-group">
                 <%= text_field_tag :search, params[:search], class:'form-control', placeholder:'Search Country' %>

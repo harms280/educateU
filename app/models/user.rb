@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :last_name
   has_many :curriculums
   has_many :courses
+  has_many :reviews
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

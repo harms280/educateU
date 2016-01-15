@@ -2,11 +2,16 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
+  resources :users, only: [:show] do
+    resources :curriculums, shallow: true
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  resources :languages
+  resources :courses 
+  # resources :curriculums
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'languages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
