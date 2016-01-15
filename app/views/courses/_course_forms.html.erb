@@ -1,0 +1,42 @@
+<div class="jumbotron">
+  <div class="container">
+    <%= form_for @course do |f| %>
+      <div class="form-group">
+        <%= f.label "Name"%>
+        <%= f.text_field :name, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Description"%> 
+        <%= f.text_area :description, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Cost"%>
+        <%= f.text_field :cost, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Skill Level"%>
+        <%= f.text_field :skill_level, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Course URL"%>
+        <%= f.text_field :url, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Course Created Date"%>
+        <%= f.text_field :course_created, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :languages, class:"col-md-2"  %>
+        <div class="col-sm-7">
+          <%= f.collection_check_boxes(:language_ids, @languages, :id, :name) do |b| %>
+              <span class="language-selection">
+                  <%= b.check_box %>
+                  <%= b.label %>
+              </span>
+          <% end %>
+        </div>
+      </div>
+      <%= f.submit class: 'btn btn-warning'%>
+    <% end %>
+  </div>
+</div>

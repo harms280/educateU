@@ -1,0 +1,14 @@
+<div>
+  <h1 class="text-center"><%= @course.name %> <small><%= @course.description %></small></h1>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <%if @course.course_created? %>
+      <p>Course created: <%= @course.course_created %></p>
+    <% end %>
+    <p>Cost: <%= @course.cost %></p>
+    <p>Skill Level: <%= @course.skill_level %></p>
+    <%= link_to "Take Course Here", @course.url %>
+  </div>
+</div>
+<%= link_to "Review Course", new_review_path, class: 'btn btn-success' %>

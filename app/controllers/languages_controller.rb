@@ -5,7 +5,6 @@ class LanguagesController < ApplicationController
 
   def show
     @language = Language.find_by_id params[:id]
-    @courses = LanguageCourse.where(language_id: params[:id])
-    binding.pry
+    @courses = @language.courses
   end
 end
