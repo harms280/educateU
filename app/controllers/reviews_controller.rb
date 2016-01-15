@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
 
   def create
     @course = Course.find_by_id params[:course_id]
-    binding.pry
     @review = @course.reviews.build(review_params)
     if @review.save 
       redirect_to @course, flash: {success: "Review Successfully Created"}
