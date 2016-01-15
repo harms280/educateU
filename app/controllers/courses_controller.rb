@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
     # @user = current_user
     # binding.pry
     @course = Course.create course_params
-    binding.pry
+    @course.languages.pop
     if @course.save
       redirect_to course_path(@course), flash: {success: "#{@course.name} added!"}
     else

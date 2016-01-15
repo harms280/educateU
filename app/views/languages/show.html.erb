@@ -9,7 +9,7 @@
     <% end %>
     <% @courses.each do |x| %>
     <div class="panel col-md-8 col-md-offset-2">
-      <%= x.name %>
+      <%= link_to x.name, x %>
     </div>
     <% end %>
   </div>
