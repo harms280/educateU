@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def new
     @curriculum = Curriculum.find_by_id params[:curriculum_id]
     @post = Post.new
+    @languages = Language.all
   end
 
   def create
@@ -12,5 +13,11 @@ class PostsController < ApplicationController
     else
       render :new
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title,:order_number,:description,:url)
   end
 end

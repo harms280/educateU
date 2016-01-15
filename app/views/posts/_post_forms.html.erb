@@ -1,0 +1,23 @@
+<div class="jumbotron">
+  <div class="container">
+    <%= form_for [@curriculum, @post] do |f| %>
+      <div class="form-group">
+        <%= f.label "Title"%>
+        <%= f.text_field :title, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Order"%> 
+        <%= f.number_field :order_number, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Description"%>
+        <%= f.text_area :description, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label "Course URL"%>
+        <%= f.text_field :url, class: "form-control"%>
+      </div>
+      <%= f.submit class: 'btn btn-warning'%>
+    <% end %>
+  </div>
+</div>
