@@ -6,13 +6,18 @@ class CurriculumsController < ApplicationController
 
   def create
     @user = current_user
-    @curriculum = @user.curriculum.build(curriculum_params)
+    @curriculum = @user.curriculums.build(curriculum_params)
     if @curriculum.save
       redirect_to @curriculum, flash: {success: "Curriculum Successfully Posted"}
     else
       render :new
     end
     # binding.pry
+  end
+
+  def show
+    @curriculum = Curriculum.find_by_id params[:id]
+    @posts = @curriculum.posts
   end
 
   private

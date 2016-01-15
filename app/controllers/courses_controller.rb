@@ -7,7 +7,6 @@ class CoursesController < ApplicationController
 
   def create
     # @user = current_user
-    # binding.pry
     @course = Course.create course_params
     @course.languages.pop
     if @course.save

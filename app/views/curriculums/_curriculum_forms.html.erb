@@ -1,0 +1,35 @@
+<div class="jumbotron">
+  <div class="container">
+    <%= form_for [@user, @curriculum], html:{class: "form-horizontal", role: "form"} do |f| %>
+      <div class="form-group">
+        <%= f.label :title, class: "col-sm-2" %>
+        <div class="col-sm-4">
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-2" %>
+        <div class="col-sm-4">
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :languages, class:"col-md-2"  %>
+        <div class="col-sm-7">
+          <%= f.collection_check_boxes(:language_ids, @languages, :id, :name) do |b| %>
+              <span class="curriculum-selection">
+                  <%= b.check_box %>
+                  <%= b.label %>
+              </span>
+          <% end %>
+        </div>
+      </div>
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <%= f.submit class:"btn btn-primary" %>
+        <%= link_to "Cancel", :back, class:"btn btn-default" %>
+      </div>
+    </div>
+    <% end %>
+  </div> 
+</div>
