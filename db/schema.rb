@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115013208) do
+ActiveRecord::Schema.define(version: 20160115030447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20160115013208) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "curriculums", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "language_courses", force: :cascade do |t|
     t.integer  "language_id"
     t.integer  "course_id"
@@ -36,6 +43,16 @@ ActiveRecord::Schema.define(version: 20160115013208) do
 
   add_index "language_courses", ["course_id"], name: "index_language_courses_on_course_id", using: :btree
   add_index "language_courses", ["language_id"], name: "index_language_courses_on_language_id", using: :btree
+
+  create_table "language_curriculums", force: :cascade do |t|
+    t.integer  "language_id"
+    t.integer  "curriculum_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "language_curriculums", ["curriculum_id"], name: "index_language_curriculums_on_curriculum_id", using: :btree
+  add_index "language_curriculums", ["language_id"], name: "index_language_curriculums_on_language_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -68,4 +85,6 @@ ActiveRecord::Schema.define(version: 20160115013208) do
 
   add_foreign_key "language_courses", "courses"
   add_foreign_key "language_courses", "languages"
+  add_foreign_key "language_curriculums", "curriculums"
+  add_foreign_key "language_curriculums", "languages"
 end
