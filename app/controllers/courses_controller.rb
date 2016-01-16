@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :set_user, only: [:new, :create, :show, :edit]
+  before_action :set_user, only: [:new, :create, :show, :edit, :update]
+  before_action :authenticate_user!, only: [:new,:create,:edit,:update, :destroy]
 
 
   def new

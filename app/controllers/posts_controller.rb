@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @curriculum = Curriculum.find_by_id params[:curriculum_id]
     @post = Post.new

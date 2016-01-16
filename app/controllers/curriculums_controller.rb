@@ -1,4 +1,6 @@
 class CurriculumsController < ApplicationController
+  before_action :authenticate_user!, only: [:new,:create,:edit,:update,:destroy]
+
   def new
     @curriculum = Curriculum.new
     @languages = Language.all
