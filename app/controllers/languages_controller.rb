@@ -1,6 +1,7 @@
 class LanguagesController < ApplicationController
   def index
-    @languages = Language.all()
+    # @languages = Language.all()
+    @languages = Language.search(params[:search])
   end
 
   def show
@@ -8,4 +9,6 @@ class LanguagesController < ApplicationController
     @courses = @language.courses
     @curriculums = @language.curriculums
   end
+
+
 end
