@@ -23,6 +23,6 @@ class CurriculumsController < ApplicationController
   private
 
   def curriculum_params
-    params.require(:curriculum).permit(:title,:description)
+    params.require(:curriculum).permit(:title,:description,language_ids: [])
   end 
 end

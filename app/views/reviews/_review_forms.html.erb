@@ -7,7 +7,7 @@
       </div>
       <div class="form-group">
         <%= f.label "Rating"%> 
-        <%= f.text_field :rating, class: "form-control"%>
+        <%= f.select :rating, [['horrible', 1], ['poor', 2], ['mediocre', 3], ['good', 4], ['great', 5]], class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.label "Review"%>

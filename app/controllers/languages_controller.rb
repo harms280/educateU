@@ -6,5 +6,6 @@ class LanguagesController < ApplicationController
   def show
     @language = Language.find_by_id params[:id]
     @courses = @language.courses
+    @curriculums = @language.curriculums
   end
 end
