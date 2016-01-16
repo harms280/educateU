@@ -3,5 +3,5 @@ class Course < ActiveRecord::Base
   has_many :languages, through: :language_courses
 
   has_many :reviews
-  # belongs_to :user
+  belongs_to :user
 end
