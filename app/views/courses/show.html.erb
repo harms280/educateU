@@ -29,9 +29,17 @@
   <div class="row">
     <% @course.reviews.each do |r| %>
       <div class="panel col-md-8 col-md-offset-2" >
-        <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %></small></h4>
-        <p><strong>Rating:</strong> <%= r.rating %></p>
-        <p><strong>Review:</strong> <%= r.review_body%></p>
+        <% if r.title? || r.review_body? %>
+          <% if r.title? %>
+            <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> <br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
+          <% end %>
+          <p><strong>Rating:</strong> <%= r.rating %></p>
+          <% if r.review_body? %>
+            <p><strong>Review:</strong> <%= r.review_body%></p>
+          <% end %>
+        <% else %>
+          <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <%= r.rating %> <small><%= time_ago_in_words(r.created_at) %></small></p>
+        <% end %>
       </div>
     <% end %>
   </div>
