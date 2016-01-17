@@ -25,13 +25,25 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @course = Course.find_by_id params[:id]
+    @languages = Language.all
+  end
 
+  def update
+    @course = Course.find_by_id params[:id]
+    @course.update course_params
+    if @course.save
+      redirect_to @course, flash: {success: "#{@course.name} updated!"}
+    else
+      @languages = Language.all
+      render :edit
+    end
   end
 
   private
 
   def course_params
-    params.require(:course).permit(:name,:description,:cost,:skill_level,:url,language_ids: [])
+    params.require(:course).permit(:name,:description,:cost,:skill_level,:url,:course_created, language_ids: [])
   end
 
   def set_user
