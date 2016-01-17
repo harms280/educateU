@@ -15,7 +15,7 @@
 <div class="jumbotron">
   <div class="container">
     <%if @course.course_created? %>
-      <p>Course created: <%= @course.course_created %></p>
+      <p>Course created: <%= @course.course_created.strftime("%m/%d/%Y") %></p>
     <% end %>
     <p>Cost: <%= @course.cost %></p>
     <p>Skill Level: <%= @course.skill_level %></p>

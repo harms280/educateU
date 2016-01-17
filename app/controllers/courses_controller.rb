@@ -40,6 +40,15 @@ class CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    @course = Course.find_by_id params[:id]
+    if @course.destroy
+      redirect_to root_path, flash: {success: "#{@course.name} successfully deleted"}
+    else
+      redirect_to @course, flash: {alert: "Error trying to delete course"}
+    end
+  end
+
   private
 
   def course_params

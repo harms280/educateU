@@ -22,7 +22,7 @@
       <%= f.text_field :skill_level %>
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
-      <%= f.collection_check_boxes :language_ids, @languages, :id, :name %>
+      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
       <%= f.submit %>
     <% end %>
 
