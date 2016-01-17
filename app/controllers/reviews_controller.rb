@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :prevent_multiple_reviews, only: [:new, :create]
+  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
 
   def new
     @course = Course.find(params[:course_id])
@@ -22,12 +23,25 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @review = Review.find_by_id params[:id]
   end
 
   def update
+    @review.update review_params
+    if @review.save
+      redirect_to course_path(@review.course_id), flash: {success: "Review successfully updated"}
+    else
+      redirect_to course_path(@review.course_id), flash: {alert: "Error: could not update"}
+    end
   end
 
   def destroy
+    @review = Review.find_by_id params[:id]
+    if @review.destroy
+      redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
+    else
+      redirect_to @course, flash: {alert: "There's been an error"}
+    end
   end
 
   private
@@ -42,4 +56,12 @@ class ReviewsController < ApplicationController
       redirect_to @course, flash: {warning: "Already reviewed course"}
     end
   end
+
+  def ensure_correct_user
+    @review = Review.find_by_id params[:id]
+    if @review.user_id != current_user.id
+      redirect_to root_path, flash: {alert: "Unauthorized Action" }
+    end
+  end
+
 end

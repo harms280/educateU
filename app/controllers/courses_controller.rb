@@ -68,7 +68,7 @@ class CoursesController < ApplicationController
   def ensure_correct_user
     @course = Course.find_by_id params[:id]
     if @course.user_id != current_user.id
-      redirect_to root_path, flash: {alert: "Cannot edit other users' courses" }
+      redirect_to root_path, flash: {alert: "Unauthorized Action" }
     end
   end
 
