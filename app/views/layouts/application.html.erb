@@ -18,7 +18,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand">educateU</a>
+        <%= link_to "educateU", root_path, class: "navbar-brand" %>
+        <!-- <a href="#" class="navbar-brand">educateU</a> -->
           <% if user_signed_in? %>
             <p class="navbar-text">User logged in: <strong><%= current_user.username %></strong></p>
           <% end %>

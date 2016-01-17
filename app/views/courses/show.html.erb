@@ -19,7 +19,7 @@
     <% end %>
     <p>Cost: <%= @course.cost %></p>
     <p>Skill Level: <%= @course.skill_level %></p>
-    <%= link_to "Take Course Here", @course.url %>
+    <%= link_to "Take Course Here", @course.url, target: "_blank" %>
   </div>
 </div>
 <div class="container">

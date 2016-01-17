@@ -2,11 +2,12 @@ class CoursesController < ApplicationController
   before_action :set_user, only: [:new, :create, :show, :edit, :update]
   before_action :authenticate_user!, only: [:new,:create,:edit,:update, :destroy]
   before_action :get_languages, only: [:new,:edit]
+  before_action :ensure_correct_user, only: [:edit,:update, :destroy]
+  before_action :set_course, only: [:show,:edit,:update,:destroy]
 
 
   def new
     @course = Course.new
-    @languages = Language.all
   end
 
   def create
@@ -21,16 +22,14 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find_by_id params[:id]
+
   end
 
   def edit
-    @course = Course.find_by_id params[:id]
-    @languages = Language.all
+
   end
 
   def update
-    @course = Course.find_by_id params[:id]
     @course.update course_params
     if @course.save
       redirect_to @course, flash: {success: "#{@course.name} updated!"}
@@ -41,11 +40,10 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.find_by_id params[:id]
     if @course.destroy
       redirect_to root_path, flash: {success: "#{@course.name} successfully deleted"}
     else
-      redirect_to @course, flash: {alert: "Error trying to delete course"}
+      redirect_to @course, flash: {alert: "Not authorized"}
     end
   end
 
@@ -59,8 +57,19 @@ class CoursesController < ApplicationController
     @user = current_user
   end
 
+  def set_course
+    @course = Course.find_by_id params[:id]
+  end
+
   def get_languages
     @languages = Language.all
+  end
+
+  def ensure_correct_user
+    @course = Course.find_by_id params[:id]
+    if @course.user_id != current_user.id
+      redirect_to root_path, flash: {alert: "Cannot edit other users' courses" }
+    end
   end
 
 end
