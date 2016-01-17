@@ -31,13 +31,10 @@
           <% if user_signed_in? %>
             <li><%= link_to 'Profile', current_user %></li>
           <% end %>
-            <% if false %>
-            <%= form_tag search_path, :method => 'get', :enforce_utf8 => false, class:'navbar-form navbar-left' do %>
-              <div class="form-group">
-                <%= text_field_tag :search, params[:search], class:'form-control', placeholder:'Search Country' %>
-              </div>
-                <%= submit_tag "Search", :name => nil, class:'btn btn-default' %>
-            <% end %>
+          <%= form_tag searches_path, :method => 'get', :enforce_utf8 => false, class:'navbar-form navbar-left' do %>
+            <div class="form-group">
+              <%= text_field_tag :keyword_search, params[:keyword_search], class:'form-control', placeholder:'Search keyword' %>
+            </div>
           <% end %>
         </ul>
 

@@ -5,11 +5,19 @@ class Language < ActiveRecord::Base
   has_many :language_curriculums, dependent: :destroy
   has_many :curriculums, through: :language_curriculums
 
+  def self.language_search(search)
+  	if search
+  		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
+  	else
+  		Language.all.order(:name)
+  	end
+  end
+
   def self.search(search)
   	if search
-  		where("lower(name) LIKE ?", "%#{search.downcase}%")
+  		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
   	else
-  		find(:all)
+  		Language.all.order(:name)
   	end
   end
 

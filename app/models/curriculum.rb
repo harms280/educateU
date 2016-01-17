@@ -3,4 +3,12 @@ class Curriculum < ActiveRecord::Base
   has_many :language_curriculums, dependent: :destroy
   has_many :languages, through: :language_curriculums
   has_many :posts, dependent: :destroy
+
+  def self.search(search)
+  	if search
+  		where("lower(title) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order(:title)
+  	else
+  		Curriculum.all.order(:name)
+  	end
+  end
 end

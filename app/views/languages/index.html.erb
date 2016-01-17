@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
-    <%= form_tag languages_path, :method => 'get', :enforce_utf8 => false do %>
+    <%= form_tag languages_path, :method => 'get', :enforce_utf8 => false, class: 'form-inline' do %>
       <div class="form-group">
+        <%= label_tag(:search, "Search for Language: ") %>
         <%= text_field_tag :search, params[:search], class:'form-control', placeholder:'Search Language', autofocus: true %>
       </div>
         <%= submit_tag "Search", :name => nil, class:'btn btn-default' %>

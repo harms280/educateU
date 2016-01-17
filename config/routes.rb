@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :courses do 
     resources :reviews, shallow: true
   end
+
+  resources :searches, only: :index
   # resources :curriculums
   # You can have the root of your site routed with "root"
   root 'languages#index'

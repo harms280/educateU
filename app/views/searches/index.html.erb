@@ -1,0 +1,18 @@
+<div class="page-header">
+	<h1>Search Results for: <%= params[:keyword_search]%>
+</div>
+
+<h3>Language matches </h3>
+<% @languages.each do |lang| %>
+	<p><%= lang.name %></p>
+<% end %>
+
+<h3>Course matches: </h3>
+<% @courses.each do |course| %>
+	<p><%= course.name %></p>
+<% end %>
+
+<h3>Curriculum matches: </h3>
+<% @curriculums.each do |cur| %>
+	<p><%= cur.title %></p>
+<% end %>
