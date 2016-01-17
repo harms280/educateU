@@ -1,18 +1,50 @@
 <div class="page-header">
-	<h1>Search Results for: <%= params[:keyword_search]%>
+	<h1>Search Results for: <em><%= params[:keyword_search]%></em></h1>
 </div>
 
-<h3>Language matches </h3>
-<% @languages.each do |lang| %>
-	<p><%= lang.name %></p>
-<% end %>
+<div class="container">
+	<div class="row">
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></span></a></li>
+	    <li><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></span></a></li>
+	    <li><a data-toggle="tab" href="#languages">Languages <span class="badge"><%= @languages.length %></span></a></li>
+	  </ul>
 
-<h3>Course matches: </h3>
-<% @courses.each do |course| %>
-	<p><%= course.name %></p>
-<% end %>
-
-<h3>Curriculum matches: </h3>
-<% @curriculums.each do |cur| %>
-	<p><%= cur.title %></p>
-<% end %>
+	  <div class="tab-content">
+	    <div id="courses" class="tab-pane fade in active">
+	      <% if @courses.length > 0 %>
+	        <% @courses.each do |x| %>
+	          <div class="panel col-md-8 col-md-offset-2">
+	            <%= link_to x.name, x %>
+	          </div>
+	        <% end %>
+	      <% else %>
+	        <h3>No Matching Courses</h3>
+	      <% end %>
+	    </div>
+	    <div id="curriculums" class="tab-pane fade">
+	      <% if @curriculums.length > 0 %>
+	        <% @curriculums.each do |x| %>
+	        <div class="panel col-md-8 col-md-offset-2">
+	          <h3><%= link_to x.title, x %></h3>
+	          <p><%= x.description %></p>
+	        </div>
+	        <% end %>
+	      <% else %>
+	        <h3>No Matching Curriculums</h3>
+	      <% end %>
+	    </div>
+	    <div id="languages" class="tab-pane fade">
+	      <% if @languages.length > 0 %>
+	        <% @languages.each do |x| %>
+	          <div class="panel col-md-8 col-md-offset-2">
+	            <%= link_to x.name, x %>
+	          </div>
+	        <% end %>
+	      <% else %>
+	        <h3>No Matching Languages</h3>
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+</div>
