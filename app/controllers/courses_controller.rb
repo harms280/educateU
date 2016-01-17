@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_user, only: [:new, :create, :show, :edit, :update]
   before_action :authenticate_user!, only: [:new,:create,:edit,:update, :destroy]
+  before_action :get_languages, only: [:new,:edit]
 
 
   def new
@@ -13,6 +14,8 @@ class CoursesController < ApplicationController
     if @course.save
       redirect_to course_path(@course), flash: {success: "#{@course.name} added!"}
     else
+      # redirect_to new_course_path(current_user), flash: {error: "Must fill out required fields!"}
+      @languages = Language.all
       render :new
     end
   end
@@ -22,7 +25,7 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   private
@@ -33,6 +36,10 @@ class CoursesController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def get_languages
+    @languages = Language.all
   end
 
 end

@@ -1,3 +1,18 @@
+<% if @course.errors.any? %>
+  <div id="error_explanation" class="container">
+    <div class="alert alert-danger">
+      <p>
+        <%= pluralize(@course.errors.count, "error") %> prohibited
+        this course from being saved:
+      </p>
+      <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 <div class="jumbotron">
   <div class="container">
     <%= form_for @course do |f| %>
@@ -27,7 +42,7 @@
       </div>
       <div class="form-group">
         <%= f.label :languages, class:"col-md-2"  %>
-        <div class="col-sm-7">
+        <div class="form-group">
           <%= f.collection_check_boxes(:language_ids, @languages, :id, :name) do |b| %>
               <span class="language-selection">
                   <%= b.check_box %>
