@@ -21,6 +21,10 @@ class CoursesController < ApplicationController
     @course = Course.find_by_id params[:id]
   end
 
+  def edit
+    
+  end
+
   private
 
   def course_params

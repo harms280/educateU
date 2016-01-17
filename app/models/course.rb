@@ -5,6 +5,9 @@ class Course < ActiveRecord::Base
   has_many :reviews
   belongs_to :user
 
+  validates :name, :url, :description, :cost, :skill_level, :languages, presence: true
+  validates :url, :name, uniqueness: true
+
   def self.search(search)
   	if search
   		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order(:name)
