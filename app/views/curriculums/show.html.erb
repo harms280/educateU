@@ -13,9 +13,11 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">
-    <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success' %>
-  </div>
+  <% if current_user.id == @curriculum.user_id %>
+    <div class="row">
+      <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success' %>
+    </div>
+  <% end %>
   <div class="row">
     <% @posts.each do |post| %>
       <div class="panel col-md-8 col-md-offset-2">

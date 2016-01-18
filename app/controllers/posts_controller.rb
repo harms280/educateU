@@ -1,14 +1,19 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
+  before_action :set_curriculum, only: [:new,:create]
+  before_action :set_post, only: [:edit,:update,:destroy]
 
   def new
     @curriculum = Curriculum.find_by_id params[:curriculum_id]
-    @post = Post.new
-    @languages = Language.all
+    if @curriculum.user_id = current_user.id
+      @post = Post.new
+    else
+      redirect_to @curriculum, flash: {warning: "Not Authroized"}
+    end
   end
 
   def create
-    @curriculum = Curriculum.find_by_id params[:curriculum_id]
     @post = @curriculum.posts.build(post_params)
     if @post.save
       redirect_to @curriculum, flash: {success: 'Post successfully created'}
@@ -18,11 +23,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by_id params[:id]
+
   end
 
   def update
-    @post = Post.find_by_id params[:id]
     @post.update post_params
     if @post.save
       redirect_to @post.curriculum, flash: {success: "Post Successfully Updated"}
@@ -32,7 +36,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by_id params[:id]
     if @post.destroy
       redirect_to @post.curriculum, flash: {success: "Post Successfully Deleted"}
     else
@@ -44,5 +47,20 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title,:position,:description,:url,:cost)
+  end
+
+  def ensure_correct_user
+    @post = Post.find_by_id params[:id]
+    if @post.curriculum.user_id != current_user.id
+      redirect_to root_path, flash: {alert: "Unauthorized Action" }
+    end
+  end
+
+  def set_curriculum
+    @curriculum = Curriculum.find_by_id params[:curriculum_id]
+  end
+
+  def set_post
+    @post = Post.find_by_id params[:id]
   end
 end
