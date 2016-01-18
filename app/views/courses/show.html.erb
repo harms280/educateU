@@ -34,12 +34,13 @@
             <% if r.title? %>
               <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> ago<br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
             <% end %>
-            <p><strong>Rating:</strong> <%= r.rating %></p>
+            <div class="star-rating" data-score=<%= r.rating %>></div>
+            <!-- <p><strong>Rating:</strong> <%= r.rating %></p> -->
             <% if r.review_body? %>
               <p><strong>Review:</strong> <%= r.review_body%></p>
             <% end %>
           <% else %>
-            <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <%= r.rating %> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
+            <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <div class="star-rating" data-score=<%= r.rating %>></div> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
           <% end %>
         </div>
         <br>
@@ -54,3 +55,13 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>
