@@ -17,8 +17,12 @@
   <div class="container">
     <%= bootstrap_form_for [@curriculum, @post] do |f| %>
       <%= f.text_field :title %>
-      <%= f.number_field :position %>
+      <%= f.number_field :position, label: "Course Order Number" %>
       <%= f.text_area :description %>
+      <%= f.form_group :cost, label: { text: 'Course Cost'} do %>
+        <%= f.radio_button :cost, 'Free', label: "Free", inline: true %>
+        <%= f.radio_button :cost, 'Paid', label: "Paid", inline: true %>
+      <% end %>
       <%= f.url_field :url %>
       <%= f.primary %>
       <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>

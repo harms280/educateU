@@ -12,6 +12,7 @@ module ApplicationHelper
 		flash.each do |msg_type, message|
 		  concat(content_tag(:div, message, class: "alert #{bootstrap_class_for(msg_type)} fade in text-center") do 
 		          concat content_tag(:button, 'x'.html_safe , class: "close", data: { dismiss: 'alert' })
+		          concat content_tag(:i, nil, class: "glyphicon glyphicon-#{bootstrap_icon_for(msg_type)}")
 		          concat message 
 		        end)
 		end

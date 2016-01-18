@@ -17,9 +17,32 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find_by_id params[:id]
+  end
+
+  def update
+    @post = Post.find_by_id params[:id]
+    @post.update post_params
+    if @post.save
+      redirect_to @post.curriculum, flash: {success: "Post Successfully Updated"}
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @post = Post.find_by_id params[:id]
+    if @post.destroy
+      redirect_to @post.curriculum, flash: {success: "Post Successfully Deleted"}
+    else
+      redirect_to @post.curriculum, flash: {error: "There's been an error"}
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title,:order_number,:description,:url)
+    params.require(:post).permit(:title,:position,:description,:url,:cost)
   end
 end
