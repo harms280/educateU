@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
     if @course.destroy
       redirect_to root_path, flash: {success: "#{@course.name} successfully deleted"}
     else
-      redirect_to @course, flash: {alert: "Not authorized"}
+      redirect_to @course, flash: {alert: "There has been an error"}
     end
   end
 

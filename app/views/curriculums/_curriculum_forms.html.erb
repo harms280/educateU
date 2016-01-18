@@ -20,7 +20,7 @@
       <%= f.text_area :description %>
       <%= f.text_field :skill_level %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
-      <%= f.submit %>
+      <%= f.primary %>
       <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
     <% end %>
     <!-- 
