@@ -1,10 +1,26 @@
+<% if @review.errors.any? %>
+  <div id="error_explanation" class="container">
+    <div class="alert alert-danger">
+      <p>
+        <%= pluralize(@review.errors.count, "error") %> prohibited
+        this review from being saved:
+      </p>
+      <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 <div class="jumbotron">
   <div class="container">
     <%= bootstrap_form_for [@course, @review] do |f| %>
       <%= f.text_field :title %>
       <%= f.select :rating, [['horrible', 1], ['poor', 2], ['mediocre', 3], ['good', 4], ['great', 5]] %>
       <%= f.text_area :review_body %>
-      <%= f.submit "Update", class: 'btn btn-warning' %>
+      <%= f.primary %>
+      <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
     <% end %>
     <!--
     <%= form_for [@course, @review] do |f| %>

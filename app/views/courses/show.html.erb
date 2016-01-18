@@ -32,14 +32,14 @@
         <div class="row">
           <% if r.title? || r.review_body? %>
             <% if r.title? %>
-              <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> <br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
+              <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> ago<br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
             <% end %>
             <p><strong>Rating:</strong> <%= r.rating %></p>
             <% if r.review_body? %>
               <p><strong>Review:</strong> <%= r.review_body%></p>
             <% end %>
           <% else %>
-            <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <%= r.rating %> <small><%= time_ago_in_words(r.created_at) %></small></p>
+            <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <%= r.rating %> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
           <% end %>
         </div>
         <br>

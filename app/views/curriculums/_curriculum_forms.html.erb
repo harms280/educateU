@@ -1,6 +1,30 @@
+<% if @curriculum.errors.any? %>
+  <div id="error_explanation" class="container">
+    <div class="alert alert-danger">
+      <p>
+        <%= pluralize(@curriculum.errors.count, "error") %> prohibited
+        this curriculum from being saved:
+      </p>
+      <ul>
+        <% @curriculum.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 <div class="jumbotron">
   <div class="container">
-    <%= form_for [@user, @curriculum], html:{class: "form-horizontal", role: "form"} do |f| %>
+    <%= bootstrap_form_for @curriculum do |f| %>
+      <%= f.text_field :title %>
+      <%= f.text_area :description %>
+      <%= f.text_field :skill_level %>
+      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
+      <%= f.submit %>
+      <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
+    <% end %>
+    <!-- 
+    <%= form_for @curriculum, html:{class: "form-horizontal", role: "form"} do |f| %>
       <div class="form-group">
         <%= f.label :title, class: "col-sm-2" %>
         <div class="col-sm-4">
@@ -31,5 +55,6 @@
       </div>
     </div>
     <% end %>
+    -->
   </div> 
 </div>

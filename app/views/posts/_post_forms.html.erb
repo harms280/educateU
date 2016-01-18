@@ -1,5 +1,29 @@
+<% if @post.errors.any? %>
+  <div id="error_explanation" class="container">
+    <div class="alert alert-danger">
+      <p>
+        <%= pluralize(@post.errors.count, "error") %> prohibited
+        this post from being saved:
+      </p>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 <div class="jumbotron">
   <div class="container">
+    <%= bootstrap_form_for [@curriculum, @post] do |f| %>
+      <%= f.text_field :title %>
+      <%= f.number_field :position %>
+      <%= f.text_area :description %>
+      <%= f.url_field :url %>
+      <%= f.primary %>
+      <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
+    <% end %>
+  <!--
     <%= form_for [@curriculum, @post] do |f| %>
       <div class="form-group">
         <%= f.label "Title"%>
@@ -7,7 +31,7 @@
       </div>
       <div class="form-group">
         <%= f.label "Order"%> 
-        <%= f.number_field :order_number, class: "form-control"%>
+        <%= f.number_field :position, class: "form-control"%>
       </div>
       <div class="form-group">
         <%= f.label "Description"%>
@@ -19,5 +43,6 @@
       </div>
       <%= f.submit class: 'btn btn-warning'%>
     <% end %>
+    -->
   </div>
 </div>

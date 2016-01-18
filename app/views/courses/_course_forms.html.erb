@@ -23,7 +23,8 @@
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
-      <%= f.submit %>
+      <%= f.primary %>
+      <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
     <% end %>
 
     <!-- <%= form_for @course do |f| %>
