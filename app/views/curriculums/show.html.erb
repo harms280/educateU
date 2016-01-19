@@ -7,7 +7,7 @@
       </small></h1>
       <% if current_user.id == @curriculum.user_id %>
         <%= link_to "Edit Curriculum", edit_curriculum_path(@curriculum), class: 'btn btn-warning pull-left' %>
-        <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {alert: "Are you sure?"} %>
+        <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
       <% end %>
     </div>
   </div>

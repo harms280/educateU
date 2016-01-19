@@ -6,7 +6,7 @@
       <% if user_signed_in? %>
         <% if current_user.id == @course.user_id %>
           <%= link_to "Edit Course", edit_course_path(@course), class: 'btn btn-warning pull-left' %>
-          <%= link_to "Delete Course", @course, method: :delete, class: 'btn btn-danger pull-right', data: {alert: "Are you sure?"} %>
+          <%= link_to "Delete Course", @course, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
         <% end %>
       <% end %>
     </div>
@@ -20,7 +20,7 @@
     <p>Cost: <%= @course.cost %></p>
     <p>Skill Level: <%= @course.skill_level %></p>
     <% if @course.average_rating? %>
-      <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @course.average_rating %>></span></p>
+      <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @course.average_rating %>></span> <%= pluralize(@course.reviews.count, "review") %></p>
     <% end %>
     <%= link_to "Take Course Here", @course.url, target: "_blank" %>
   </div>

@@ -19,7 +19,7 @@
       <%= f.text_field :title %>
       <%= f.number_field :position, label: "Course Order Number" %>
       <%= f.text_area :description %>
-      <%= f.form_group :cost, label: { text: 'Course Cost'} do %>
+      <%= f.form_group :cost, label: { text: 'Cost'} do %>
         <%= f.radio_button :cost, 'Free', label: "Free", inline: true %>
         <%= f.radio_button :cost, 'Paid', label: "Paid", inline: true %>
       <% end %>

@@ -18,14 +18,17 @@
     <%= bootstrap_form_for @course do |f| %>
       <%= f.text_field :name %>
       <%= f.text_area :description %>
-      <%= f.select :cost, [['Free','Free'],['Paid','Paid']]%>
+      <%= f.form_group :cost, label: { text: 'Cost'} do %>
+        <%= f.radio_button :cost, 'Free', label: "Free", inline: true %>
+        <%= f.radio_button :cost, 'Paid', label: "Paid", inline: true %>
+      <% end %>
       <%= f.text_field :price, prepend: '$' %>
       <%= f.select :skill_level, [['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
       <%= f.primary %>
-      <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
+      <%= link_to "Cancel", root_path, class: 'btn btn-danger pull-right' %>
     <% end %>
 
     <!-- <%= form_for @course do |f| %>
