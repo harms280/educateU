@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 20160119040035) do
     t.string   "cost"
     t.string   "skill_level"
     t.string   "url"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.date     "course_created"
-    t.float    "average_rating", default: 0.0
+    t.float    "average_rating"
     t.string   "price"
   end
 

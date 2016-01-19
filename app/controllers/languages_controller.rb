@@ -6,8 +6,13 @@ class LanguagesController < ApplicationController
 
   def show
     @language = Language.find_by_id params[:id]
-    @courses = @language.courses
+    @courses = @language.courses.order(average_rating: :desc)
     @curriculums = @language.curriculums
+  end
+
+  def sort
+    @language = Language.find_by_id params[:id]
+
   end
 
 

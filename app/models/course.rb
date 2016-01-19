@@ -10,9 +10,9 @@ class Course < ActiveRecord::Base
 
   def self.search(search)
   	if search
-  		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order(:name)
+  		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%")
   	else
-  		Course.all.order(:name)
+  		Course.all
   	end
   end
 end
