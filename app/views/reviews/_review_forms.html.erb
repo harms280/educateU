@@ -17,7 +17,7 @@
   <div class="container">
     <%= bootstrap_form_for [@course, @review] do |f| %>
       <%= f.text_field :title %>
-      <div id="star-rating"></div>
+      <div id="star-rating" data-score=<%= @review.rating %>></div>
       <%= f.text_area :review_body %>
       <%= f.primary %>
       <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
@@ -45,6 +45,9 @@
 <script>
   $('#star-rating').raty({
     path: '/assets/',
-    scoreName: 'review[rating]'
+    scoreName: 'review[rating]',
+    score: function() {
+      return $(this).attr('data-score');
+    }
   });
 </script>

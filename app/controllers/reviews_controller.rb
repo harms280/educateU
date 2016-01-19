@@ -12,7 +12,9 @@ class ReviewsController < ApplicationController
     @course = Course.find_by_id params[:course_id]
     @review = @course.reviews.build(review_params)
     @review.user_id = current_user.id
-    if @review.save 
+    if @review.save
+      @course.average_rating = calculate_average @course
+      @course.save
       redirect_to @course, flash: {success: "Review Successfully Created"}
     else
       render :new
@@ -27,8 +29,11 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    @course = @review.course
     @review.update review_params
     if @review.save
+      @course.average_rating = calculate_average @course
+      @course.save
       redirect_to course_path(@review.course_id), flash: {success: "Review successfully updated"}
     else
       redirect_to course_path(@review.course_id), flash: {alert: "Error: could not update"}
@@ -36,8 +41,11 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @course = @review.course
     @review = Review.find_by_id params[:id]
     if @review.destroy
+      @course.average_rating = calculate_average @course
+      @course.save
       redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
     else
       redirect_to @course, flash: {alert: "There's been an error"}
@@ -62,6 +70,10 @@ class ReviewsController < ApplicationController
     if @review.user_id != current_user.id
       redirect_to root_path, flash: {alert: "Unauthorized Action" }
     end
+  end
+
+  def calculate_average(course)
+    Review.where(course_id: course.id).average(:rating)
   end
 
 end

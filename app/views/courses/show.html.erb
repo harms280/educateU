@@ -19,6 +19,9 @@
     <% end %>
     <p>Cost: <%= @course.cost %></p>
     <p>Skill Level: <%= @course.skill_level %></p>
+    <% if @course.average_rating? %>
+      <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @course.average_rating %>></span></p>
+    <% end %>
     <%= link_to "Take Course Here", @course.url, target: "_blank" %>
   </div>
 </div>
@@ -60,6 +63,7 @@
   $('.star-rating').raty({
     path: '/assets/',
     readOnly: true,
+    halfShow: true,
     score: function() {
       return $(this).attr('data-score');
     }
