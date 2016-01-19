@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:name,:description,:cost,:skill_level,:url,:course_created, language_ids: [])
+    params.require(:course).permit(:name,:description,:cost,:price,:skill_level,:url,:course_created, language_ids: [])
   end
 
   def set_user

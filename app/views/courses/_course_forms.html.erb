@@ -18,8 +18,9 @@
     <%= bootstrap_form_for @course do |f| %>
       <%= f.text_field :name %>
       <%= f.text_area :description %>
-      <%= f.text_field :cost, prepend: '$' %>
-      <%= f.text_field :skill_level %>
+      <%= f.select :cost, [['Free','Free'],['Paid','Paid']]%>
+      <%= f.text_field :price, prepend: '$' %>
+      <%= f.select :skill_level, [['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
