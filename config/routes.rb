@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :posts, shallow: true
   end
 
+  get '/languages/:id/course_sorted', to: 'languages#course_sorted'
+
   resources :courses do 
     resources :reviews, shallow: true
   end

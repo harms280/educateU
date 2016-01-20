@@ -1,5 +1,5 @@
 class LanguagesController < ApplicationController
-  before_action :set_language, only: [:show, :highest_rated, :lowest_rated, :most_recent, :oldest]
+  before_action :set_language, only: [:show, :course_sorted]
 
   def index
     # @languages = Language.all()
@@ -8,15 +8,28 @@ class LanguagesController < ApplicationController
 
   def show
     @courses = @language.courses.order(average_rating: :desc)
+    # filtering_params(params).each do |key, value|
+    #   @courses = @courses.public_send(key, value) if value.present?
+    # end
+    @curriculums = @language.curriculums
+  end
+
+  def course_sorted
+    @courses = @language.courses
     filtering_params(params).each do |key, value|
       @courses = @courses.public_send(key, value) if value.present?
     end
     @curriculums = @language.curriculums
+    render :show
   end
 
-  def highest_rated
-
-  end
+  # def curriculum_sorted
+  #   @courses = @language.courses
+  #   filtering_params(params).each do |key, value|
+  #     @courses = @courses.public_send(key, value) if value.present?
+  #   end
+  #   @curriculums = @language.curriculums
+  # end
 
   def most_recent
     @courses = @language.courses.order(course_created: :desc)
@@ -37,7 +50,7 @@ class LanguagesController < ApplicationController
   private
 
   def filtering_params(params)
-    params.slice(:cost, :skill_level, :rating)
+    params.slice(:cost, :skill_level, :rating, :organize)
   end
 
   def set_language
