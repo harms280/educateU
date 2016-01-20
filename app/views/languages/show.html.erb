@@ -18,7 +18,17 @@
     <div class="tab-content">
       <div id="courses" class="tab-pane fade in active">
         <div class="row">
-          <button class="btn btn-info col-md-offset-1" data-toggle="collapse" data-target="#courseFilters" aria-expanded="false" aria-controls="courseFilters">Filters</button>
+          <div class="col-lg-10 col-md-offset-1">
+            <button class="btn btn-info pull-left" data-toggle="collapse" data-target="#courseFilters" aria-expanded="false" aria-controls="courseFilters">Filters</button>
+            
+            <%= form_tag "/languages/#{@language.id}/course_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
+              <div class="form-group">
+                <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']]),class: 'form-control')%>
+              </div>
+                <%= submit_tag "Sort", :name => nil, class:'btn btn-default' %>
+            <% end %>
+          </div>
+        </div>
           <div id="courseFilters" class="collapse col-md-offset-1">
             <%= form_tag "/languages/#{@language.id}/course_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline' do %>
               <div class="form-group">
@@ -37,13 +47,13 @@
                 <%= select_tag(:rating, options_for_select([ ['1 star+', 0], ['2 stars+', 2], ['3 stars+', 3], ['4 stars+', 4], ['5 stars', 5]]),class: 'form-control')%>
               </div>
               <div class="form-group">
-                <%= label_tag(:organize, 'Organize: ')%>
+                <%= label_tag(:organize, 'Sort: ')%>
                 <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']]),class: 'form-control')%>
               </div>
                 <%= submit_tag "Filter", :name => nil, class:'btn btn-default' %>
             <% end %>
           </div>
-        </div>
+        <!-- </div> -->
         <div class="row">
           <% if @courses.length > 0 %>
             <% @courses.each do |x| %>
@@ -70,5 +80,4 @@
       </div>
     </div>
   </div>
-
 </div>
