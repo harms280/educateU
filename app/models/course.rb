@@ -1,4 +1,11 @@
 class Course < ActiveRecord::Base
+
+  scope :cost, -> (cost) {where cost: cost}
+  scope :skill_level, -> (skill_level) {where skill_level: skill_level }
+  scope :rating, -> (rating) {where("course.rating >= ?", rating)}
+
+
+
   has_many :language_courses, dependent: :destroy
   has_many :languages, through: :language_courses
 

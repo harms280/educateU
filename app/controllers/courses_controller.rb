@@ -1,10 +1,13 @@
 class CoursesController < ApplicationController
+
   before_action :set_user, only: [:new, :create, :show, :edit, :update]
   before_action :authenticate_user!, only: [:new,:create,:edit,:update, :destroy]
   before_action :get_languages, only: [:new,:edit]
   before_action :ensure_correct_user, only: [:edit,:update, :destroy]
   before_action :set_course, only: [:show,:edit,:update,:destroy]
 
+
+  # scope :
 
   def new
     @course = Course.new
