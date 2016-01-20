@@ -26,3 +26,11 @@
 label.required:after {
 	content: " *";
 }
+
+.form-inline > * {
+	margin: 5px 3px;
+}
+
+.form-inline label:first-of-type {
+	font-weight: 700;
+}

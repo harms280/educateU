@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
 
   scope :cost, -> (cost) {where cost: cost}
   scope :skill_level, -> (skill_level) {where skill_level: skill_level }
-  scope :rating, -> (rating) {where("course.rating >= ?", rating)}
+  scope :rating, -> (rating) {where("average_rating >= ?", rating.to_f)}
 
 
 
