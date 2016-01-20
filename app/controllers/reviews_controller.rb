@@ -44,7 +44,8 @@ class ReviewsController < ApplicationController
     @course = @review.course
     @review = Review.find_by_id params[:id]
     if @review.destroy
-      @course.average_rating = calculate_average @course
+      avg = calculate_average @course
+      @course.average_rating = avg || 0
       @course.save
       redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
     else
