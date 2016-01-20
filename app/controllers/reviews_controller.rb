@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     if @review.save
       @course.average_rating = calculate_average @course
+      @course.review_count = @course.reviews.count
       @course.save
       redirect_to @course, flash: {success: "Review Successfully Created"}
     else
@@ -46,6 +47,7 @@ class ReviewsController < ApplicationController
     if @review.destroy
       avg = calculate_average @course
       @course.average_rating = avg || 0
+      @course.review_count = @course.reviews.count
       @course.save
       redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
     else

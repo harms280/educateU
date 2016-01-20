@@ -18,7 +18,7 @@
     <%= bootstrap_form_for @curriculum do |f| %>
       <%= f.text_field :title %>
       <%= f.text_area :description %>
-      <%= f.text_field :skill_level %>
+      <%= f.select :skill_level, [['Select One', ''],['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
       <%= f.primary %>
       <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>

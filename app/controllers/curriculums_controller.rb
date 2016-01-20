@@ -20,7 +20,7 @@ class CurriculumsController < ApplicationController
   end
 
   def show
-    @posts = @curriculum.posts
+    @posts = @curriculum.posts.order(:position)
   end
 
   def edit
