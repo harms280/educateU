@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-10 col-md-offset-1">
+    <button class="btn btn-info pull-left" data-toggle="collapse" data-target="#curriculumFilters" aria-expanded="false" aria-controls="curriculumFilters">Filters</button>
+    
+    <%= form_tag searches_curriculum_sorted_path, :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
+      <div class="form-group">
+      <%= label_tag(:cur_organize, "Sort by: ")%>
+        <%= select_tag(:cur_organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'created_at DESC'], ['Most Reviewed', 'review_count DESC'], ['Name', 'name']], params[:cur_organize]),{class: 'form-control', onchange: "form.submit()" })%>
+      </div>
+      <%= hidden_field_tag :keyword_search, params[:keyword_search] %>
+    <% end %>
+  </div>
+</div>
+<!-- Collapsed Filter options -->
+<div id="curriculumFilters" class="collapse col-md-offset-1">
+  <%= form_tag searches_curriculum_sorted_path, :method => 'get', :enforce_utf8 => false, class: 'form-inline' do %>
+    <div class="form-group">
+      <%= label_tag(:cur_skill_level, 'Skill Level: ')%>
+      <%= select_tag(:cur_skill_level, options_for_select([['All', ''],['Beginner', 'Beginner'], ['Intermediate','Intermediate'],['Advanced','Advanced']]),class: 'form-control')%>
+    </div> 
+    <div class="form-group">
+      <%= label_tag(:cur_rating, 'Rating: ')%>
+      <%= select_tag(:cur_rating, options_for_select([ ['1 star+', 0], ['2 stars+', 2], ['3 stars+', 3], ['4 stars+', 4], ['5 stars', 5]]),class: 'form-control')%>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:cur_organize, 'Sort: ')%>
+      <%= select_tag(:cur_organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'created_at DESC'], ['Most Reviewed', 'review_count DESC']]),class: 'form-control')%>
+    </div>
+      <%= hidden_field_tag :keyword_search, params[:keyword_search] %>
+      <%= submit_tag "Filter", :name => nil, class:'btn btn-default' %>
+  <% end %>
+</div>

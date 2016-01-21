@@ -11,12 +11,24 @@
   <!-- Navigation tab selection -->
   <div class="row">
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
-      <li><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
+      <% if @tab_courses %>
+        <li class="active"><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
+      <% else %>
+        <li><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
+      <% end %>
+      <% if @tab_curriculums %>
+        <li class="active"><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
+      <% else %>
+        <li><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
+      <% end %>
     </ul>
   <!-- The Course Tab Contents -->
     <div class="tab-content">
-      <div id="courses" class="tab-pane fade in active">
+      <% if @tab_courses %>
+        <div id="courses" class="tab-pane fade in active">
+      <% else %>
+        <div id="courses" class="tab-pane fade">
+      <% end %>
       <!-- Sort options and Filter Button-->
         <%= render partial: "shared/course_filters", locals: {language: @language} %>
         <!-- Course panel list -->
@@ -33,7 +45,13 @@
         </div>
       </div>
       <!-- Curriculums panel list -->
-      <div id="curriculums" class="tab-pane fade">
+      <% if @tab_curriculums %>
+        <div id="curriculums" class="tab-pane fade in active">
+      <% else %>
+        <div id="curriculums" class="tab-pane fade">
+      <% end %>
+        <!-- Sorting and filters -->
+        <%= render partial: "shared/curriculum_filters", locals: {language: @language}%>
         <% if @curriculums.length > 0 %>
           <% @curriculums.each do |x| %>
           <div class="panel col-md-8 col-md-offset-2">
