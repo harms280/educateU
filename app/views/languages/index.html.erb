@@ -10,8 +10,8 @@
   </div>
   <div class="row">
     <% if user_signed_in? %>
-      <%= link_to 'Create Curriculum', new_curriculum_path, class: 'btn btn-info pull-left'%>
-      <%= link_to "Add Course", new_course_path, class: 'btn btn-primary pull-right' %>
+      <%= link_to "Add Course", new_course_path, class: 'btn btn-primary pull-left' %>
+      <%= link_to 'Create Curriculum', new_curriculum_path, class: 'btn btn-info pull-right'%>
     <% end %>
   </div>
   <div class="row">

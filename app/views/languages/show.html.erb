@@ -4,8 +4,8 @@
 <div class="container">
   <div class="row">
     <% if user_signed_in? %>
-    <%= link_to "Add Course", new_course_path, class: 'btn btn-primary pull-right' %>
-    <%= link_to 'Create Curriculum', new_curriculum_path, class: 'btn btn-info pull-left'%>
+    <%= link_to "Add Course", new_course_path, class: 'btn btn-primary pull-left' %>
+    <%= link_to 'Create Curriculum', new_curriculum_path, class: 'btn btn-info pull-right'%>
     <% end %>
   </div>
 
@@ -23,9 +23,9 @@
             
             <%= form_tag "/languages/#{@language.id}/course_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
               <div class="form-group">
-                <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']], params[:organize]),class: 'form-control')%>
+              <%= label_tag(:organize, "Sort by: ")%>
+                <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']], params[:organize]),{class: 'form-control', onchange: "form.submit()" })%>
               </div>
-                <%= submit_tag "Sort", :name => nil, class:'btn btn-default' %>
             <% end %>
           </div>
         </div>
