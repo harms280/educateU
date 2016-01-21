@@ -11,7 +11,11 @@
 	  </ul>
 
 	  <div class="tab-content">
+	  	<!-- Course panel content -->
 	    <div id="courses" class="tab-pane fade in active">
+	    	<!-- Filters and Sort -->
+	    	<%= render partial: 'shared/course_search_filters', locals: {language: @language} %>
+	    	<!-- Courses -->
 	      <% if @courses.length > 0 %>
 	        <% @courses.each do |x| %>
 	          <div class="panel col-md-8 col-md-offset-2">
@@ -22,6 +26,7 @@
 	        <h3>No Matching Courses</h3>
 	      <% end %>
 	    </div>
+	    <!-- Curriculum content -->
 	    <div id="curriculums" class="tab-pane fade">
 	      <% if @curriculums.length > 0 %>
 	        <% @curriculums.each do |x| %>
@@ -34,6 +39,7 @@
 	        <h3>No Matching Curriculums</h3>
 	      <% end %>
 	    </div>
+	    <!-- Language content -->
 	    <div id="languages" class="tab-pane fade">
 	      <% if @languages.length > 0 %>
 	        <% @languages.each do |x| %>

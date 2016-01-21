@@ -34,7 +34,7 @@
           <% end %>
           <%= form_tag searches_path, :method => 'get', :enforce_utf8 => false, class:'navbar-form navbar-left' do %>
             <div class="form-group">
-              <%= text_field_tag :keyword_search, params[:keyword_search], class:'form-control', required: true, placeholder:'Search keyword' %>
+              <%= text_field_tag :keyword_search, params[:keyword_search], keyword_search: params[:keyword_search], class:'form-control', required: true, placeholder:'Search keyword' %>
             </div>
           <% end %>
         </ul>
