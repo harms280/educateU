@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <h1><%= @curriculum.title %> <br> <small><%= @curriculum.description %> <br> Created by: <%= @curriculum.user.username %> <br> 
-        Languages: <% @curriculum.languages.each do |x| %> <%= x.name %> &nbsp; <% end %>
+        Languages: <% @curriculum.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %>
 
       </small></h1>
       <% if current_user.id == @curriculum.user_id %>
@@ -21,11 +21,10 @@
   <div class="row">
     <% @posts.each do |post| %>
       <div class="panel col-md-8 col-md-offset-2">
-        <h3><%= post.title %></h3>
-        <%= post.position %>
+        <h3><%= post.position %>. <%= link_to post.title, post.url %></h3>
+        
         <p><%= post.cost %></p>
-        <%= link_to post.title, post.url %>
-        <%= post.description %>
+        <p><%= post.description %></p>
         <br>
         <% if current_user.id == @curriculum.user_id %>
           <%= link_to edit_post_path(post), class: 'btn btn-warning btn-sm ' do %>
