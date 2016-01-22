@@ -29,6 +29,8 @@ gem "bootswatch-rails"
 
 gem 'bootstrap_form'
 
+gem 'font-awesome-sass'
+
 #figaro for API keys
 gem "figaro"
 

@@ -23,6 +23,9 @@
 
 @import "bootswatch/lumen/bootswatch";
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 label.required:after {
 	content: " *";
 }
