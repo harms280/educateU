@@ -31,6 +31,8 @@ gem 'bootstrap_form'
 
 gem 'font-awesome-sass'
 
+gem 'acts_as_list'
+
 #figaro for API keys
 gem "figaro"
 

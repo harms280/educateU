@@ -8,6 +8,8 @@ class PostsController < ApplicationController
     @curriculum = Curriculum.find_by_id params[:curriculum_id]
     if @curriculum.user_id = current_user.id
       @post = Post.new
+      # binding.pry
+      @post.position = @curriculum.posts.count + 1
     else
       redirect_to @curriculum, flash: {warning: "Not Authroized"}
     end
@@ -15,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @curriculum.posts.build(post_params)
+    @post.insert_at(@post.position)
     if @post.save
       redirect_to @curriculum, flash: {success: 'Post successfully created'}
     else
