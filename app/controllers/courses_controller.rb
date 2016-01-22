@@ -14,8 +14,8 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course.url.strip!
     @course = @user.courses.build course_params
+    @course.url.strip!
     if @course.save
       redirect_to course_path(@course), flash: {success: "#{@course.name} added!"}
     else
