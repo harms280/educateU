@@ -17,6 +17,11 @@ class PostsController < ApplicationController
 
   def create
     @post = @curriculum.posts.build(post_params)
+    if @post.position > @curriculum.posts.count + 1
+      @post.position = @curriculum.posts.count + 1
+    elsif @post.position <= 0 
+      @post.position = 1
+    end
     @post.insert_at(@post.position)
     if @post.save
       redirect_to @curriculum, flash: {success: 'Post successfully created'}
@@ -30,8 +35,15 @@ class PostsController < ApplicationController
   end
 
   def update
+    @curriculum = @post.curriculum
     @post.update post_params
+    if @post.position > @curriculum.posts.count + 1
+      @post.position = @curriculum.posts.count + 1
+    elsif @post.position <= 0 
+      @post.position = 1
+    end
     if @post.save
+      @post.insert_at(@post.position)
       redirect_to @post.curriculum, flash: {success: "Post Successfully Updated"}
     else
       render :edit

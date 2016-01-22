@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get '/searches/course_sorted', to: 'searches#course_sorted'
   get '/searches/curriculum_sorted', to: 'searches#curriculum_sorted'
 
+  get '/curriculums/:id/reorder_posts', to: 'curriculums#edit_posts_order'
+  put '/curriculums/:id/reorder_posts', to: 'curriculums#update_posts_order'
+
   resources :courses do 
     resources :reviews, shallow: true
   end

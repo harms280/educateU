@@ -1,7 +1,7 @@
 class CurriculumsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:create,:edit,:update,:destroy]
   before_action :ensure_correct_user, only: [:edit,:update,:destroy]
-  before_action :set_curriculum, only: [:show,:edit,:update,:destroy]
+  before_action :set_curriculum, only: [:show,:edit,:update,:destroy,:edit_posts_order,]
   before_action :get_languages, only: [:new,:edit,:update]
 
   def new
@@ -43,6 +43,14 @@ class CurriculumsController < ApplicationController
     else
       redirect_to @curriculum, flash: {error: "There has been an error"}
     end
+  end
+
+  def edit_posts_order
+    # @posts = @curriculum.posts.order(:position)
+  end
+
+  def update_posts_order
+
   end
 
   private

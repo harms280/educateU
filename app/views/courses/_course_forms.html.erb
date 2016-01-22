@@ -23,7 +23,7 @@
         <%= f.radio_button :cost, 'Paid', label: "Paid", inline: true %>
       <% end %>
       <%= f.text_field :price, prepend: '$' %>
-      <%= f.select :skill_level, [['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
+      <%= f.select :skill_level, [['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']], :include_blank => true %>
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
