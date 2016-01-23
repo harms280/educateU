@@ -16,6 +16,21 @@
 //= require turbolinks
 //= require_tree .
 
-// $(function() {
+$(function() {
 //   $('#editOrder').on('click');
-// });
+
+	$('#search').on('keyup', function() {
+		var valThis = this.value.toLowerCase(), 
+		    length = this.value.length; 
+
+		$('.panel h3 a').each(function () {
+			var text = $(this).text(),
+				textL = text.toLowerCase(),
+				index = textL.indexOf(valThis);
+
+				index >= 0 ? $(this).parent().parent().show() : $(this).parent().parent().hide();
+
+		});
+	});
+
+});
