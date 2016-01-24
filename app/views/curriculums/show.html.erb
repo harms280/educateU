@@ -18,7 +18,7 @@
   <% if current_user %>
     <% if current_user.id == @curriculum.user_id %>
       <div class="row">
-        <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-left' %>
+        <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-right' %>
       </div>
     <% else %>
       <%= link_to "Review Curriculum", new_curriculum_review_path(@curriculum), class: 'btn btn-info pull-right' %>
@@ -26,9 +26,9 @@
   <% end %>
 
   <div class="row">
-    <ul class="nav nav-pills">
-      <li class="active"><a data-toggle="pill" href="#curriculum">Curriculum</a></li>
-      <li><a data-toggle="pill" href="#reviews">Reviews</a></li>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#curriculum">Curriculum</a></li>
+      <li><a data-toggle="tab" href="#reviews">Reviews</a></li>
     </ul>
 
     <div class="tab-content">

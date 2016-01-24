@@ -18,18 +18,24 @@
 //= require_tree .
 
 $(function() {
-//   $('#editOrder').on('click');
+	var $noMatch = $('#noMatch');
+	var $search = $('#search');
+	var $panels = $('.panel h3 a');
+	var $panelsVisible = $('.panel:visible');
+	$noMatch.hide();
+	// $noMatch.text($panels.size());
 
-	$('#search').on('keyup', function() {
+	$search.on('keyup', function() {
 		var valThis = this.value.toLowerCase(), 
 		    length = this.value.length; 
 
-		$('.panel h3 a').each(function () {
+		$panels.each(function () {
 			var text = $(this).text(),
 				textL = text.toLowerCase(),
 				index = textL.indexOf(valThis);
 
 				index >= 0 ? $(this).parent().parent().show() : $(this).parent().parent().hide();
+				$('.panel:visible').length === 0 ? $noMatch.show() : $noMatch.hide();
 		});
 	});
 

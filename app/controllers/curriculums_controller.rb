@@ -40,7 +40,7 @@ class CurriculumsController < ApplicationController
 
   def destroy
     if @curriculum.destroy
-      redirect_to root_path, flash: {success: "#{@curriculum.title} Successfully Deleted"}
+      redirect_to root_path, flash: {success: "#{@curriculum.name} Successfully Deleted"}
     else
       redirect_to @curriculum, flash: {error: "There has been an error"}
     end

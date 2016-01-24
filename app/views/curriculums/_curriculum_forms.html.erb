@@ -16,7 +16,7 @@
 <div class="jumbotron">
   <div class="container">
     <%= bootstrap_form_for @curriculum do |f| %>
-      <%= f.text_field :title %>
+      <%= f.text_field :name %>
       <%= f.text_area :description %>
       <%= f.select :skill_level, [['Select One', ''],['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
       <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages", wrapper: {class: 'languageChoice'}, inline: true %>
@@ -26,9 +26,9 @@
     <!-- 
     <%= form_for @curriculum, html:{class: "form-horizontal", role: "form"} do |f| %>
       <div class="form-group">
-        <%= f.label :title, class: "col-sm-2" %>
+        <%= f.label :name, class: "col-sm-2" %>
         <div class="col-sm-4">
-          <%= f.text_field :title, class: "form-control" %>
+          <%= f.text_field :name, class: "form-control" %>
         </div>
       </div>
       <div class="form-group">
