@@ -5,7 +5,7 @@
     <%= form_tag "/languages/#{language.id}/course_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
       <div class="form-group">
       <%= label_tag(:organize, "Sort by: ")%>
-        <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']], params[:organize]),{class: 'form-control', onchange: "form.submit()" })%>
+        <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC'], ['Alphabetical', 'lower(title)']], params[:organize]),{class: 'form-control', onchange: "form.submit()" })%>
       </div>
     <% end %>
   </div>
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group">
       <%= label_tag(:organize, 'Sort: ')%>
-      <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']]),class: 'form-control')%>
+      <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC'], ['Alphabetical', 'lower(title)']]),class: 'form-control')%>
     </div>
       <%= submit_tag "Filter", :name => nil, class:'btn btn-default' %>
   <% end %>
