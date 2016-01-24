@@ -5,19 +5,26 @@
         Languages: <% @curriculum.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %>
 
       </small></h1>
-      <% if current_user.id == @curriculum.user_id %>
-        <%= link_to "Edit Curriculum", edit_curriculum_path(@curriculum), class: 'btn btn-warning pull-left' %>
-        <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
+      <% if current_user %>
+        <% if current_user.id == @curriculum.user_id %>
+          <%= link_to "Edit Curriculum", edit_curriculum_path(@curriculum), class: 'btn btn-warning pull-left' %>
+          <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
+        <% end %>
       <% end %>
     </div>
   </div>
 </div>
 <div class="container">
-  <% if current_user.id == @curriculum.user_id %>
-    <div class="row">
-      <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-left' %>
-    </div>
+  <% if current_user %>
+    <% if current_user.id == @curriculum.user_id %>
+      <div class="row">
+        <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-left' %>
+      </div>
+    <% end %>
   <% end %>
+    <% if !current_user %>
+      <%= link_to "Review Curriculum", new_curriculum_review_path(@curriculum), class: 'btn btn-info pull-right' %>
+    <% end %>
   <div class="row">
     <% @posts.each do |post| %>
       <div class="panel col-md-8 col-md-offset-2">

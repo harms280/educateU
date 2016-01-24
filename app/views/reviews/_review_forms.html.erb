@@ -15,7 +15,7 @@
 <% end %>
 <div class="jumbotron">
   <div class="container">
-    <%= bootstrap_form_for [@course, @review] do |f| %>
+    <%= bootstrap_form_for [@parent, @review] do |f| %>
       <%= f.text_field :title %>
       <div id="star-rating" data-score=<%= @review.rating %>></div>
       <%= f.text_area :review_body %>

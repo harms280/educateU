@@ -9,6 +9,7 @@ class Curriculum < ActiveRecord::Base
   has_many :language_curriculums, dependent: :destroy
   has_many :languages, through: :language_curriculums
   has_many :posts, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :title, :description, :languages, :user_id, presence: true
 

@@ -4,21 +4,39 @@ class ReviewsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit,:update,:destroy]
 
   def new
-    @course = Course.find(params[:course_id])
+    if params[:course_id]
+      @parent = Course.find(params[:course_id])
+    else
+      @parent = Curriculum.find(parms[:curriculum_id])
+    end
     @review = Review.new
   end
 
   def create
-    @course = Course.find_by_id params[:course_id]
-    @review = @course.reviews.build(review_params)
-    @review.user_id = current_user.id
-    if @review.save
-      @course.average_rating = calculate_average @course
-      @course.review_count = @course.reviews.count
-      @course.save
-      redirect_to @course, flash: {success: "Review Successfully Created"}
-    else
-      render :new
+    if params[:course_id]
+      @course = Course.find_by_id params[:course_id]
+      @review = @course.reviews.build(review_params)
+      @review.user_id = current_user.id
+      if @review.save
+        @course.average_rating = calculate_course_average @course
+        @course.review_count = @course.reviews.count
+        @course.save
+        redirect_to @course, flash: {success: "Review Successfully Created"}
+      else
+        render :new
+      end
+    else 
+      @curriculum = Curriculum.find_by_id params[:curriculum_id]
+      @review = @curriculum.reviews.build(review_params)
+      @review.user_id = current_user.id
+      if @review.save
+        @curriculum.average_rating = calculate_curriculum_average @curriculum
+        @curriculum.review_count = @curriculum.reviews.count
+        @curriculum.save
+        redirect_to @curriculum, flash: {success: "Review Successfully Created"}
+      else
+        render :new
+      end
     end
   end
 
@@ -33,7 +51,7 @@ class ReviewsController < ApplicationController
     @course = @review.course
     @review.update review_params
     if @review.save
-      @course.average_rating = calculate_average @course
+      @course.average_rating = calculate_course_average @course
       @course.save
       redirect_to course_path(@review.course_id), flash: {success: "Review successfully updated"}
     else
@@ -45,7 +63,7 @@ class ReviewsController < ApplicationController
     @course = @review.course
     @review = Review.find_by_id params[:id]
     if @review.destroy
-      avg = calculate_average @course
+      avg = calculate_course_average @course
       @course.average_rating = avg || 0
       @course.review_count = @course.reviews.count
       @course.save
@@ -62,10 +80,16 @@ class ReviewsController < ApplicationController
   end
 
   def prevent_multiple_reviews
-    @course = Course.find_by_id params[:course_id]
-    unless current_user.reviews.where(course_id: params[:course_id]).empty?
-      redirect_to @course, flash: {warning: "Already reviewed course"}
-    end
+    if params[:course_id]
+      @course = Course.find_by_id params[:course_id]
+      unless current_user.reviews.where(course_id: params[:course_id]).empty?
+        redirect_to @course, flash: {warning: "Already reviewed course"}
+      end
+    else
+      @curriculum = Curriculum.find_by_id params[:curriculum_id]
+      unless current_user.reviews.where(curriculum_id: params[:curriculum_id]).empty?
+        redirect_to @curriculum, flash: {warning: "Already reviewed curriculum"}
+      end
   end
 
   def ensure_correct_user
@@ -75,8 +99,12 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def calculate_average(course)
+  def calculate_course_average(course)
     Review.where(course_id: course.id).average(:rating)
+  end
+
+  def calculate_curriculum_average(curriculum)
+    Review.where(curriculum_id: curriculum.id).average(:rating)
   end
 
 end

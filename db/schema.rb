@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120213807) do
+ActiveRecord::Schema.define(version: 20160124050343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,12 +87,14 @@ ActiveRecord::Schema.define(version: 20160120213807) do
     t.string   "title"
     t.integer  "rating"
     t.text     "review_body"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "course_id"
     t.integer  "user_id"
+    t.integer  "curriculum_id"
   end
 
+  add_index "reviews", ["curriculum_id"], name: "index_reviews_on_curriculum_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -127,5 +129,6 @@ ActiveRecord::Schema.define(version: 20160120213807) do
   add_foreign_key "language_curriculums", "curriculums"
   add_foreign_key "language_curriculums", "languages"
   add_foreign_key "posts", "curriculums"
+  add_foreign_key "reviews", "curriculums"
   add_foreign_key "reviews", "users"
 end

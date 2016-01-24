@@ -33,6 +33,6 @@ $(function() {
 		});
 	});
 
-	$('.alert').delay(3000).fadeOut();
+	$('.alert').delay(4000).fadeOut();
 
 });
