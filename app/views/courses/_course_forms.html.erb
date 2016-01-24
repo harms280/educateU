@@ -26,7 +26,7 @@
       <%= f.select :skill_level, [['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']], :include_blank => true %>
       <%= f.url_field :url %>
       <%= f.date_field :course_created %>
-      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
+      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages", :item_wrapper_class => 'checkbox' %>
       <%= f.primary %>
       <%= link_to "Cancel", root_path, class: 'btn btn-danger pull-right' %>
     <% end %>
