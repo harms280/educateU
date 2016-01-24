@@ -3,6 +3,6 @@ class Review < ActiveRecord::Base
   belongs_to :curriculum
   belongs_to :user
 
-  validates_presence_of :rating, :user_id, :course_id
+  validates_presence_of :rating, :user_id
 
 end

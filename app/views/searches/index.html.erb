@@ -52,7 +52,7 @@
 	      <% if @curriculums.count > 0 %>
 	        <% @curriculums.each do |x| %>
 	        <div class="panel col-md-8 col-md-offset-2">
-	          <h3><%= link_to x.title, x %></h3>
+	          <h3><%= link_to x.name, x %></h3>
 	          <p><%= x.description %></p>
 	        </div>
 	        <% end %>

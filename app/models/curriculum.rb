@@ -11,13 +11,13 @@ class Curriculum < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
-  validates :title, :description, :languages, :user_id, presence: true
+  validates :name, :description, :languages, :user_id, presence: true
 
   def self.search(search)
   	if search
-  		where("lower(title) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order('lower(title')
+  		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order('lower(name')
   	else
-  		Curriculum.all.order('lower(title')
+  		Curriculum.all.order('lower(name')
   	end
   end
 end

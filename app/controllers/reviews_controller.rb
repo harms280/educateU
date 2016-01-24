@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     if params[:course_id]
       @parent = Course.find(params[:course_id])
     else
-      @parent = Curriculum.find(parms[:curriculum_id])
+      @parent = Curriculum.find(params[:curriculum_id])
     end
     @review = Review.new
   end
@@ -23,6 +23,7 @@ class ReviewsController < ApplicationController
         @course.save
         redirect_to @course, flash: {success: "Review Successfully Created"}
       else
+        @parent = Course.find(params[:course_id])
         render :new
       end
     else 
@@ -35,6 +36,7 @@ class ReviewsController < ApplicationController
         @curriculum.save
         redirect_to @curriculum, flash: {success: "Review Successfully Created"}
       else
+        @parent = Curriculum.find(params[:curriculum_id])
         render :new
       end
     end
@@ -45,31 +47,58 @@ class ReviewsController < ApplicationController
 
   def edit
     @review = Review.find_by_id params[:id]
+    @name = @review.course_id ? @review.course.name : @review.curriculum.name
   end
 
   def update
-    @course = @review.course
-    @review.update review_params
-    if @review.save
-      @course.average_rating = calculate_course_average @course
-      @course.save
-      redirect_to course_path(@review.course_id), flash: {success: "Review successfully updated"}
+    if @review.course_id
+      @course = @review.course
+      @review.update review_params
+      if @review.save
+        @course.average_rating = calculate_course_average @course
+        @course.save
+        redirect_to course_path(@review.course_id), flash: {success: "Review successfully updated"}
+      else
+        redirect_to course_path(@review.course_id), flash: {alert: "Error: could not update"}
+      end
     else
-      redirect_to course_path(@review.course_id), flash: {alert: "Error: could not update"}
+      @curriculum = @review.curriculum
+      @review.update review_params
+      if @review.save
+        @curriculum.average_rating = calculate_curriculum_average @curriculum
+        @curriculum.save
+        redirect_to @curriculum, flash: {success: "Review successfully updated"}
+      else
+        redirect_to @curriculum, flash: {alert: "Error: could not update"}
+      end
     end
   end
 
   def destroy
-    @course = @review.course
-    @review = Review.find_by_id params[:id]
-    if @review.destroy
-      avg = calculate_course_average @course
-      @course.average_rating = avg || 0
-      @course.review_count = @course.reviews.count
-      @course.save
-      redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
+    if @review.course_id?
+      @course = @review.course
+      @review = Review.find_by_id params[:id]
+      if @review.destroy
+        avg = calculate_course_average @course
+        @course.average_rating = avg || 0
+        @course.review_count = @course.reviews.count
+        @course.save
+        redirect_to course_path(@review.course_id), flash: {success: "Review successfully deleted"}
+      else
+        redirect_to @course, flash: {alert: "There's been an error"}
+      end
     else
-      redirect_to @course, flash: {alert: "There's been an error"}
+      @curriculum = @review.curriculum
+      @review = Review.find_by_id params[:id]
+      if @review.destroy
+        avg = calculate_curriculum_average @curriculum
+        @curriculum.average_rating = avg || 0
+        @curriculum.review_count = @curriculum.reviews.count
+        @curriculum.save
+        redirect_to curriculum_path(@review.curriculum_id), flash: {success: "Review successfully deleted"}
+      else
+        redirect_to @curriculum, flash: {alert: "There's been an error"}
+      end
     end
   end
 
@@ -90,6 +119,7 @@ class ReviewsController < ApplicationController
       unless current_user.reviews.where(curriculum_id: params[:curriculum_id]).empty?
         redirect_to @curriculum, flash: {warning: "Already reviewed curriculum"}
       end
+    end
   end
 
   def ensure_correct_user

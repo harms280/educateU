@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h1><%= @curriculum.title %> <br> <small><%= @curriculum.description %> <br> Created by: <%= @curriculum.user.username %> <br> 
+      <h1><%= @curriculum.name %> <br> <small><%= @curriculum.description %> <br> Created by: <%= @curriculum.user.username %> <br> 
         Languages: <% @curriculum.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %>
 
       </small></h1>
@@ -20,29 +20,79 @@
       <div class="row">
         <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-left' %>
       </div>
-    <% end %>
-  <% end %>
-    <% if !current_user %>
+    <% else %>
       <%= link_to "Review Curriculum", new_curriculum_review_path(@curriculum), class: 'btn btn-info pull-right' %>
     <% end %>
+  <% end %>
+
   <div class="row">
-    <% @posts.each do |post| %>
-      <div class="panel col-md-8 col-md-offset-2">
-        <h3><%= post.position %>. <%= link_to post.title, post.url %></h3>
-        
-        <p><%= post.cost %></p>
-        <p><%= post.description %></p>
-        <br>
-        <% if current_user.id == @curriculum.user_id %>
-          <%= link_to edit_post_path(post), class: 'btn btn-warning btn-sm ' do %>
-            <span class="glyphicon glyphicon-pencil"> Edit</span>
-          <% end %>
-          <%= link_to post, method: :delete, class: 'btn btn-danger btn-sm ', data: {alert: "Are you sure?"} do %>
-            <span class="glyphicon glyphicon-remove"> Delete</span>
-          <% end %>
+    <ul class="nav nav-pills">
+      <li class="active"><a data-toggle="pill" href="#curriculum">Curriculum</a></li>
+      <li><a data-toggle="pill" href="#reviews">Reviews</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="curriculum" class="tab-pane fade in active">
+        <% @posts.each do |post| %>
+          <div class="panel col-md-8 col-md-offset-2">
+            <h3><%= post.position %>. <%= link_to post.title, post.url %></h3>
+            
+            <p><%= post.cost %></p>
+            <p><%= post.description %></p>
+            <br>
+            <% if current_user.id == @curriculum.user_id %>
+              <%= link_to edit_post_path(post), class: 'btn btn-warning btn-sm ' do %>
+                <span class="glyphicon glyphicon-pencil"> Edit</span>
+              <% end %>
+              <%= link_to post, method: :delete, class: 'btn btn-danger btn-sm ', data: {alert: "Are you sure?"} do %>
+                <span class="glyphicon glyphicon-remove"> Delete</span>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    <% end %>
+
+      <div id="reviews" class="tab-pane fade">
+        <h3>Reviews</h3>  
+        <% @reviews.each do |r| %>
+          <div class="panel col-md-8 col-md-offset-2" >
+            <div class="row">
+              <% if r.title? || r.review_body? %>
+                <% if r.title? %>
+                  <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> ago<br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
+                <% end %>
+                <div class="star-rating" data-score=<%= r.rating %>></div>
+                <!-- <p><strong>Rating:</strong> <%= r.rating %></p> -->
+                <% if r.review_body? %>
+                  <p><strong>Review:</strong> <%= r.review_body%></p>
+                <% end %>
+              <% else %>
+                <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <div class="star-rating" data-score=<%= r.rating %>></div> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
+              <% end %>
+            </div>
+            <br>
+            <% if r.user_id == current_user.id %>
+              <div class="row">
+                <%= link_to "Edit Review", edit_review_path(r), class: 'btn btn-warning btn-sm' %>
+                <%= link_to "Delete Review", r, method: :delete, class: 'btn btn-danger btn-sm', data: {alert: "Are you sure?"} %>
+              </div>
+              <br>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
   </div>
-  
 </div>
+
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    halfShow: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

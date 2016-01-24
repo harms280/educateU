@@ -21,6 +21,7 @@ class CurriculumsController < ApplicationController
 
   def show
     @posts = @curriculum.posts.order(:position)
+    @reviews = @curriculum.reviews.order(:created_at)
   end
 
   def edit
@@ -56,7 +57,7 @@ class CurriculumsController < ApplicationController
   private
 
   def curriculum_params
-    params.require(:curriculum).permit(:title,:description,language_ids: [])
+    params.require(:curriculum).permit(:name,:description,language_ids: [])
   end
 
   def ensure_correct_user

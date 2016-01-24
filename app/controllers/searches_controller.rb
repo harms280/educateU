@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
     @tab_courses = true
 		@languages = @languages.order('lower(name)')
 		@courses = @courses.order(average_rating: :desc)
-		@curriculums = @curriculums.order('lower(title)')
+		@curriculums = @curriculums.order('lower(name)')
 	end
 
   def course_sorted
@@ -17,7 +17,7 @@ class SearchesController < ApplicationController
     filtering_course_params(params).each do |key, value|
       @courses = @courses.public_send(key, value) if value.present?
     end
-    @curriculums = @curriculums.order(:title)
+    @curriculums = @curriculums.order(:name)
     render :index
   end
 
