@@ -29,8 +29,9 @@ $(function() {
 				index = textL.indexOf(valThis);
 
 				index >= 0 ? $(this).parent().parent().show() : $(this).parent().parent().hide();
-
 		});
 	});
+
+	$('.alert').delay(3000).fadeOut();
 
 });
