@@ -38,29 +38,8 @@ class LanguagesController < ApplicationController
     render :show
   end
 
-  # def curriculum_sorted
-  #   @courses = @language.courses
-  #   filtering_params(params).each do |key, value|
-  #     @courses = @courses.public_send(key, value) if value.present?
-  #   end
-  #   @curriculums = @language.curriculums
-  # end
-
-  # def most_recent
-  #   @courses = @language.courses.order(course_created: :desc)
-  #   filtering_params(params).each do |key, value|
-  #     @courses = @courses.public_send(key, value) if value.present?
-  #   end
-  # end
-
-  # def oldest
-  # 	@courses = @language.courses.order(:course_created)
-  # 	filtering_params(params).each do |key, value|
-  # 	  @courses = @courses.public_send(key, value) if value.present?
-  # 	end
-  # end
-
-  
+  def about
+  end
 
   private
 

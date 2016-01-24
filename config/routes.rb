@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   # end
   resources :users, only: [:show]
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+
   resources :languages
   resources :curriculums do
     resources :posts, shallow: true
@@ -24,17 +23,15 @@ Rails.application.routes.draw do
   get '/curriculums/:id/reorder_posts', to: 'curriculums#edit_posts_order'
   put '/curriculums/:id/reorder_posts', to: 'curriculums#update_posts_order'
 
+  get '/about', to: 'languages#about'
+
   resources :courses do 
     resources :reviews, shallow: true
   end
 
   resources :searches, only: :index
-  # resources :curriculums
-  # You can have the root of your site routed with "root"
-  root 'languages#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  root 'languages#index'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
