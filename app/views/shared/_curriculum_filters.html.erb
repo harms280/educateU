@@ -2,7 +2,7 @@
   <div class="col-lg-10 col-md-offset-1">
     <button class="btn btn-info pull-left" data-toggle="collapse" data-target="#curriculumFilters" aria-expanded="false" aria-controls="curriculumFilters">Filters</button>
     
-    <%= form_tag searches_curriculum_sorted_path, :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
+    <%= form_tag "/languages/#{language.id}/curriculum_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline pull-right' do %>
       <div class="form-group">
       <%= label_tag(:cur_organize, "Sort by: ")%>
         <%= select_tag(:cur_organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'created_at DESC'], ['Most Reviewed', 'review_count DESC'], ['Name', 'name']], params[:cur_organize]),{class: 'form-control', onchange: "form.submit()" })%>
@@ -12,7 +12,7 @@
 </div>
 <!-- Collapsed Filter options -->
 <div id="curriculumFilters" class="collapse col-md-offset-1">
-  <%= form_tag searches_curriculum_sorted_path, :method => 'get', :enforce_utf8 => false, class: 'form-inline' do %>
+  <%= form_tag "/languages/#{language.id}/curriculum_sorted", :method => 'get', :enforce_utf8 => false, class: 'form-inline' do %>
     <div class="form-group">
       <%= label_tag(:cur_skill_level, 'Skill Level: ')%>
       <%= select_tag(:cur_skill_level, options_for_select([['All', ''],['Beginner', 'Beginner'], ['Intermediate','Intermediate'],['Advanced','Advanced']]),class: 'form-control')%>

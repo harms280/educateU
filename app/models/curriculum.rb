@@ -15,9 +15,9 @@ class Curriculum < ActiveRecord::Base
 
   def self.search(search)
   	if search
-  		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%").order('lower(name')
+  		where("lower(name) LIKE ? OR lower(description) LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%")
   	else
-  		Curriculum.all.order('lower(name')
+  		Curriculum.all
   	end
   end
 end

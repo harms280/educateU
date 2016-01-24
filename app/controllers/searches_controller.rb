@@ -25,7 +25,7 @@ class SearchesController < ApplicationController
     @tab_curriculums = true
     @courses = @courses.order(:average_rating)
     @languages = @languages.order(:name)
-    filtering_curriculum_params(params) do |key, value|
+    filtering_curriculum_params(params).each do |key, value|
       @curriculums = @curriculums.public_send(key, value) if value.present?
     end
     render :index

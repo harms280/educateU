@@ -57,7 +57,7 @@ class CurriculumsController < ApplicationController
   private
 
   def curriculum_params
-    params.require(:curriculum).permit(:name,:description,language_ids: [])
+    params.require(:curriculum).permit(:name,:skill_level, :description,language_ids: [])
   end
 
   def ensure_correct_user
