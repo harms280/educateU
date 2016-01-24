@@ -17,7 +17,7 @@ languages.each do |x|
 end
 
 # Language.create([{name: 'JavaScript'}, {name: 'Ruby'}, {name: 'Python'}, {name: 'AngularJS'}, {name: 'SQL'}, {name: 'HTML'}])
-Course.create({name: 'JavaScript Road Trip Part 1', description: 'An introduction to the very basics of the JavaScript language. Build a foundation of JavaScript syntax and learn how to use values, variables, and files.', cost: '0', skill_level: 'beginner', url: 'https://www.codeschool.com/courses/javascript-road-trip-part-1'})
-c = Course.last
-j = Language.first
-c.languages << j
+# Course.create({name: 'JavaScript Road Trip Part 1', description: 'An introduction to the very basics of the JavaScript language. Build a foundation of JavaScript syntax and learn how to use values, variables, and files.', cost: '0', skill_level: 'beginner', url: 'https://www.codeschool.com/courses/javascript-road-trip-part-1'})
+# c = Course.last
+# j = Language.first
+# c.languages << j

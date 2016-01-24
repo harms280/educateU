@@ -37,3 +37,7 @@ label.required:after {
 .form-inline label:first-of-type {
 	font-weight: 700;
 }
+
+.languageChoice > label.control-label {
+	margin-right: 1em;
+}
