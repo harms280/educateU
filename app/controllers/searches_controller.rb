@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
 
 	def index
     @tab_courses = true
-		@languages = @languages.order(:name)
+		@languages = @languages.order('lower(name)')
 		@courses = @courses.order(average_rating: :desc)
 		@curriculums = @curriculums.order(:title)
 	end

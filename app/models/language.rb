@@ -10,7 +10,7 @@ class Language < ActiveRecord::Base
 
   def self.language_search(search)
   	if search
-  		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
+  		where("lower(name) LIKE ?", "%#{search.downcase}%").order('lower(name)')
   	else
   		Language.all.order('lower(name)')
   	end
@@ -18,7 +18,7 @@ class Language < ActiveRecord::Base
 
   def self.search(search)
   	if search
-  		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
+  		where("lower(name) LIKE ?", "%#{search.downcase}%").order('lower(name)')
   	else
   		Language.all.order('lower(name)')
   	end
