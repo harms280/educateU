@@ -19,7 +19,7 @@
       <%= f.text_field :title %>
       <%= f.text_area :description %>
       <%= f.select :skill_level, [['Select One', ''],['Beginner', 'Beginner'], ['Intermediate', 'Intermediate'], ['Advanced', 'Advanced']] %>
-      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages" %>
+      <%= f.collection_check_boxes :language_ids, @languages, :id, :name, label: "Languages", wrapper: {class: 'languageChoice'}, inline: true %>
       <%= f.primary %>
       <%= link_to "Cancel", :back, class: 'btn btn-danger pull-right' %>
     <% end %>

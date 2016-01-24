@@ -12,7 +12,7 @@ class Language < ActiveRecord::Base
   	if search
   		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
   	else
-  		Language.all.order(:name)
+  		Language.all.order('lower(name)')
   	end
   end
 
@@ -20,7 +20,7 @@ class Language < ActiveRecord::Base
   	if search
   		where("lower(name) LIKE ?", "%#{search.downcase}%").order(:name)
   	else
-  		Language.all.order(:name)
+  		Language.all.order('lower(name)')
   	end
   end
 
