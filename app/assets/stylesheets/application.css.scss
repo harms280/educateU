@@ -30,10 +30,20 @@ body {
 	background: url(exclusive_paper.png) repeat 0 0;
 }
 
+#about {
+	-webkit-animation-duration: 2s;
+	-moz-animation-duration: 2s;
+	-o-animation-duration: 2s;
+}
+
 .panel {
 	min-height: 100px;
 	height: 100%;
 	line-height: 100px;
+	-webkit-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	-moz-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	background: url(crossword.png) repeat 0 0;
 }
 
 .panel[display="none"] {
@@ -43,9 +53,24 @@ body {
 .panel > h3 {
 	display: inline;
 	vertical-align: middle;
+	font-family: 'Inconsolata';
+	
 }
 
+.panel > h3 > a {
+	/*color: rgb(179, 179, 255);*/
+}
 
+#search {
+
+}
+/*h1	{
+	font-family: 'Inconsolata';
+}*/
+
+.row {
+	margin-bottom: 1em;
+}
 
 label.required:after {
 	content: " *";
