@@ -63,12 +63,13 @@ body {
 }
 
 .panel > h3 > a {
-	/*color: rgb(179, 179, 255);*/
+	color: rgb(186, 103, 21);
 }
 
 #search {
 
 }
+
 /*h1	{
 	font-family: 'Inconsolata';
 }*/
@@ -79,6 +80,22 @@ body {
 
 .nav-pills {
 	margin-bottom: 1em;
+}
+
+.nav-pills > li > a  {
+	color: rgb(198, 21, 21);
+}
+
+.nav-pills > li > a > .badge {
+	background-color: rgb(201, 79, 79);
+}
+
+.nav-pills > li.active > a {
+	background-color: rgb(201, 79, 79) !important;
+}
+
+.nav-pills > li.active > a > .badge {
+	color: rgb(198, 21, 21);
 }
 
 label.required:after {
