@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h1>Search Results for: <em><%= params[:keyword_search]%></em></h1>
+	<h1 class="text-center">Search Results for: <em><%= params[:keyword_search]%></em></h1>
 </div>
 
 <div class="container">
@@ -34,10 +34,33 @@
 	    	<!-- Courses -->
 	      <% if @courses.count > 0 %>
 	        <% @courses.each do |x| %>
-	          <div class="panel col-md-8 col-md-offset-2">
-	            <%= link_to x.name, x %>
-	          </div>
-	        <% end %>
+                <div class="panel col-md-10 col-md-offset-1">
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                      <h3 class="pull-left"><%= link_to x.name, x %> 
+                      <% if x.cost == "Free" %> 
+                        <small><span class="label label-success label-sm">Free</span></small>
+                      <% end %>
+                        <br> 
+                        <% if x.course_created %>
+                          <small>released: <%= x.course_created.strftime("%m/%d/%Y") %></small>
+                        <% else %>
+                          <small>posted: <%= time_ago_in_words(r.created_at) %></small>
+                        <% end %>
+                      </h3>
+                      <h5 class="pull-right">Average Rating: <span class="star-rating" data-score=<%= x.average_rating %>></span> <br> <small><%= pluralize(x.review_count, "Review") %></small></h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2 col-md-offset-1">
+                      <p><strong>Skill Level:</strong> <%= x.skill_level %></p>
+                    </div>
+                    <div class="col-md-8">
+                      <p><strong>Course Description: </strong>  <%= x.description %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
 	      <% else %>
 	        <h3>No Matching Courses</h3>
 	      <% end %>
@@ -51,10 +74,23 @@
 	    <%= render partial: 'shared/curriculum_search_filters', locals: {language: @language} %>
 	      <% if @curriculums.count > 0 %>
 	        <% @curriculums.each do |x| %>
-	        <div class="panel col-md-8 col-md-offset-2">
-	          <h3><%= link_to x.name, x %></h3>
-	          <p><%= x.description %></p>
-	        </div>
+            <div class="panel col-md-10 col-md-offset-1">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                  <h3 class="pull-left"><%= link_to x.name, x %> 
+                    <br>
+                    <small>posted <%= time_ago_in_words(x.created_at) %> ago </small>
+                  </h3>
+                  <h5 class="pull-right">Average Rating: <span class="star-rating" data-score=<%= x.average_rating %>></span> <br> <small><%= pluralize(x.review_count, "Review") %></small></h5>
+                </div>
+              </div>
+              <div class="row">
+                
+                <div class="col-md-10 col-md-offset-1">
+                  <p><strong>Curriculum Description: </strong>  <%= x.description %></p>
+                </div>
+              </div>
+            </div>
 	        <% end %>
 	      <% else %>
 	        <h3>No Matching Curriculums</h3>
@@ -68,9 +104,11 @@
 			<% end %>
 	      <% if @languages.count > 0 %>
 	        <% @languages.each do |x| %>
-	          <div class="panel col-md-8 col-md-offset-2">
-	            <%= link_to x.name, x %>
+	        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+	          <div class="panel language text-center col-md-10 col-md-offset-1">
+	            <h3><%= link_to x.name, x %></h3>
 	          </div>
+	        </div>
 	        <% end %>
 	      <% else %>
 	        <h3>No Matching Languages</h3>
@@ -79,3 +117,14 @@
 	  </div>
 	</div>
 </div>
+
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    halfShow: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

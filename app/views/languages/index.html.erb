@@ -1,3 +1,6 @@
+<div class="page-header">
+  <h1 class="text-center">educateU</h1>
+</div>
 <div class="container">
   <div class="row">
     <label for="search"><strong>Search for Subject</strong></label>
@@ -9,7 +12,7 @@
       <%= link_to 'Create Curriculum', new_curriculum_path, class: 'btn btn-info pull-right'%>
     <% end %>
   </div>
-  <div class="row">
+  <div class="row animated fadeIn">
       <% @languages.each do |x| %>
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <div class="panel language text-center col-md-10 col-md-offset-1">

@@ -39,9 +39,9 @@
       <div id="curriculum" class="tab-pane fade in active">
         <% @posts.each do |post| %>
           <div class="panel col-md-8 col-md-offset-2">
-            <h3><%= post.position %>. <%= link_to post.title, post.url %></h3>
+            <h3><%= post.position %>. <%= link_to post.title, post.url %> 
+            <% if post.cost == "Free" %> <small><span class="label label-success">Free</span></small> <% end %></h3>
             
-            <p><%= post.cost %></p>
             <p><%= post.description %></p>
             <br>
             
