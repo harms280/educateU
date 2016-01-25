@@ -6,7 +6,10 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= include_uploadcare_widget_from_cdn version: "1.5.5", min: true %>
-  <%= uploadcare_settings %>
+  
+  <script>
+    UPLOADCARE_PUBLIC_KEY = "aa46cd44fdf3fcd38d5c";
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-default">
