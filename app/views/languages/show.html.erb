@@ -10,19 +10,19 @@
   </div>
   <!-- Navigation tab selection -->
   <div class="row">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills">
       <% if @tab_courses %>
-        <li class="active"><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
+        <li class="active"><a data-toggle="pill" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
       <% else %>
-        <li><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
+        <li><a data-toggle="pill" href="#courses">Courses <span class="badge"><%= @courses.length %></a></li>
       <% end %>
       <% if @tab_curriculums %>
-        <li class="active"><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
+        <li class="active"><a data-toggle="pill" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
       <% else %>
-        <li><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
+        <li><a data-toggle="pill" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.length %></a></li>
       <% end %>
     </ul>
-  <!-- The Course Tab Contents -->
+  <!-- The Course pill Contents -->
     <div class="tab-content">
       <% if @tab_courses %>
         <div id="courses" class="tab-pane fade in active">

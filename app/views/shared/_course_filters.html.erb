@@ -32,6 +32,6 @@
       <%= label_tag(:organize, 'Sort: ')%>
       <%= select_tag(:organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC'], ['Alphabetical', 'lower(title)']]),class: 'form-control')%>
     </div>
-      <%= submit_tag "Filter", :name => nil, class:'btn btn-default' %>
+      <%= submit_tag "Filter", :name => nil, class:'btn btn-warning' %>
   <% end %>
 </div>

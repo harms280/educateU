@@ -30,9 +30,7 @@ class LanguagesController < ApplicationController
     @tab_curriculums = true
     @courses = @language.courses.order(:average_rating)
     @curriculums = @language.curriculums
-    binding.pry
     filtering_curriculum_params(params).each do |key, value|
-      binding.pry
       @curriculums = @curriculums.public_send(key, value) if value.present?
     end
     render :show

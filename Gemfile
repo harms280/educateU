@@ -32,6 +32,8 @@ gem 'bootstrap_form'
 
 gem 'font-awesome-sass'
 
+gem 'animate-rails'
+
 gem 'acts_as_list'
 
 #figaro for API keys

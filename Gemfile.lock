@@ -38,6 +38,8 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
+    animate-rails (1.0.9)
+      rails
     arel (6.0.3)
     autoprefixer-rails (6.0.3)
       execjs
@@ -219,6 +221,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  animate-rails
   bootstrap-sass
   bootstrap_form
   bootswatch-rails

@@ -25,6 +25,6 @@
       <%= label_tag(:cur_organize, 'Sort: ')%>
       <%= select_tag(:cur_organize, options_for_select([ ['Highest Rated', 'average_rating DESC'], ['Lowest Rated', 'average_rating ASC'], ['Most Recent', 'course_created DESC'], ['Most Reviewed', 'review_count DESC']]),class: 'form-control')%>
     </div>
-      <%= submit_tag "Filter", :name => nil, class:'btn btn-default' %>
+      <%= submit_tag "Filter", :name => nil, class:'btn btn-warning' %>
   <% end %>
 </div>

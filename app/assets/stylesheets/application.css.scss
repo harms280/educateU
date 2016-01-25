@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require rails_bootstrap_forms
+ *= require animate
  */
 
 @import "bootswatch/lumen/variables";
@@ -36,7 +37,7 @@ body {
 	-o-animation-duration: 2s;
 }
 
-.panel {
+.language {
 	min-height: 100px;
 	height: 100%;
 	line-height: 100px;
@@ -46,11 +47,15 @@ body {
 	background: url(crossword.png) repeat 0 0;
 }
 
-.panel[display="none"] {
-	min-height: 0px;
+.panel {
+	-webkit-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	-moz-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	background: url(crossword.png) repeat 0 0;
+	min-height: 100px;
 }
 
-.panel > h3 {
+.language > h3 {
 	display: inline;
 	vertical-align: middle;
 	font-family: 'Inconsolata';
@@ -69,6 +74,10 @@ body {
 }*/
 
 .row {
+	margin-bottom: 1em;
+}
+
+.nav-pills {
 	margin-bottom: 1em;
 }
 
