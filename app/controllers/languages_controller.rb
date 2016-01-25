@@ -13,7 +13,7 @@ class LanguagesController < ApplicationController
     # filtering_params(params).each do |key, value|
     #   @courses = @courses.public_send(key, value) if value.present?
     # end
-    @curriculums = @language.curriculums
+    @curriculums = @language.curriculums.order('average_rating DESC')
   end
 
   def course_sorted

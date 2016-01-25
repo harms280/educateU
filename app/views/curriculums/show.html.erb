@@ -1,19 +1,23 @@
 <div class="page-header">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h1><%= @curriculum.name %> <br> <small><%= @curriculum.description %> <br> Created by: <%= @curriculum.user.username %> <br> 
-        Languages: <% @curriculum.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %>
+  <h1 class="text-center"><%= @curriculum.name %> <br> <small><%= @curriculum.description %> </small></h1>
+</div>
 
-      </small></h1>
-      <% if current_user %>
-        <% if current_user.id == @curriculum.user_id %>
-          <%= link_to "Edit Curriculum", edit_curriculum_path(@curriculum), class: 'btn btn-warning pull-left' %>
-          <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
-        <% end %>
-      <% end %>
-    </div>
+<div class="jumbotron">
+  <div class="container">
+    <p>Created by: <%= @curriculum.user.username %></p>
+    <p>Curriculum created: <%= @curriculum.created_at.strftime("%m/%d/%Y") %></p>
+    <p>Skill Level: <%= @curriculum.skill_level %></p>
+    <% if @curriculum.average_rating? %>
+      <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @curriculum.average_rating %>></span> <%= pluralize(@curriculum.reviews.count, "review") %></p>
+    <% end %>
+    <p>Languages: <% @curriculum.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %></p>
+    <% if current_user && current_user.id == @curriculum.user_id %>
+      <%= link_to "Edit Curriculum", edit_curriculum_path(@curriculum), class: 'btn btn-warning pull-left' %>
+      <%= link_to "Delete Curriculum", @curriculum, method: :delete, class: 'btn btn-danger pull-right', data: {confirm: "Are you sure?"} %>
+    <% end %>
   </div>
 </div>
+    
 <div class="container">
   <% if current_user %>
     <% if current_user.id == @curriculum.user_id %>
@@ -21,7 +25,7 @@
         <%= link_to "Add Post", new_curriculum_post_path(@curriculum),class: 'btn btn-success pull-right' %>
       </div>
     <% else %>
-      <%= link_to "Review Curriculum", new_curriculum_review_path(@curriculum), class: 'btn btn-info pull-right' %>
+      <%= link_to "Review Curriculum", new_curriculum_review_path(@curriculum), class: 'btn btn-warning pull-right' %>
     <% end %>
   <% end %>
 
@@ -55,30 +59,29 @@
       </div>
 
       <div id="reviews" class="tab-pane fade">
-        <h3>Reviews</h3>  
         <% @reviews.each do |r| %>
           <div class="panel col-md-8 col-md-offset-2" >
             <div class="row">
               <% if r.title? || r.review_body? %>
                 <% if r.title? %>
-                  <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> ago<br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
+                  <h4 class="pull-left"><strong><%= r.title%></strong> <small> by <strong><%= link_to r.user.username, r.user %></strong><br>posted <%= time_ago_in_words(r.created_at) %> ago<br> </small></h4>
                 <% end %>
-                <div class="star-rating" data-score=<%= r.rating %>></div>
+                <p class="pull-right"><br>Rating: <span class="star-rating" data-score=<%= r.rating %>></span></p>
                 <!-- <p><strong>Rating:</strong> <%= r.rating %></p> -->
                 <% if r.review_body? %>
-                  <p><strong>Review:</strong> <%= r.review_body%></p>
+                  <div class="row">
+                    <p class="col-md-10 col-md-offset-1"><strong>Review:</strong> <%= r.review_body%></p>
+                  </div>
                 <% end %>
               <% else %>
                 <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <div class="star-rating" data-score=<%= r.rating %>></div> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
               <% end %>
             </div>
-            <br>
             <% if current_user && r.user_id == current_user.id %>
               <div class="row">
                 <%= link_to "Edit Review", edit_review_path(r), class: 'btn btn-warning btn-sm' %>
                 <%= link_to "Delete Review", r, method: :delete, class: 'btn btn-danger btn-sm', data: {alert: "Are you sure?"} %>
               </div>
-              <br>
             <% end %>
           </div>
         <% end %>
