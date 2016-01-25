@@ -26,6 +26,27 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+body {
+	background: url(exclusive_paper.png) repeat 0 0;
+}
+
+.panel {
+	min-height: 100px;
+	height: 100%;
+	line-height: 100px;
+}
+
+.panel[display="none"] {
+	min-height: 0px;
+}
+
+.panel > h3 {
+	display: inline;
+	vertical-align: middle;
+}
+
+
+
 label.required:after {
 	content: " *";
 }

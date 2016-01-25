@@ -34,7 +34,7 @@ $(function() {
 				textL = text.toLowerCase(),
 				index = textL.indexOf(valThis);
 
-				index >= 0 ? $(this).parent().parent().show() : $(this).parent().parent().hide();
+				index >= 0 ? $(this).parent().parent().parent().show() : $(this).parent().parent().parent().hide();
 				$('.panel:visible').length === 0 ? $noMatch.show() : $noMatch.hide();
 		});
 	});

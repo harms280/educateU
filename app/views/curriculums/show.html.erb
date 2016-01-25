@@ -40,13 +40,15 @@
             <p><%= post.cost %></p>
             <p><%= post.description %></p>
             <br>
-            <% if current_user.id == @curriculum.user_id %>
+            
+            <% if current_user && current_user.id == @curriculum.user_id %>
               <%= link_to edit_post_path(post), class: 'btn btn-warning btn-sm ' do %>
                 <span class="glyphicon glyphicon-pencil"> Edit</span>
-              <% end %>
-              <%= link_to post, method: :delete, class: 'btn btn-danger btn-sm ', data: {alert: "Are you sure?"} do %>
-                <span class="glyphicon glyphicon-remove"> Delete</span>
-              <% end %>
+            <% end %>
+          
+            <%= link_to post, method: :delete, class: 'btn btn-danger btn-sm ', data: {alert: "Are you sure?"} do %>
+              <span class="glyphicon glyphicon-remove"> Delete</span>
+            <% end %>
             <% end %>
           </div>
         <% end %>
@@ -71,7 +73,7 @@
               <% end %>
             </div>
             <br>
-            <% if r.user_id == current_user.id %>
+            <% if current_user && r.user_id == current_user.id %>
               <div class="row">
                 <%= link_to "Edit Review", edit_review_path(r), class: 'btn btn-warning btn-sm' %>
                 <%= link_to "Delete Review", r, method: :delete, class: 'btn btn-danger btn-sm', data: {alert: "Are you sure?"} %>

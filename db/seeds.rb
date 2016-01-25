@@ -10,7 +10,7 @@ Language.destroy_all
 Course.destroy_all
 User.destroy_all
 
-languages = ["AngularJS", "Backbone.js", "Bootstrap", "C", "C#", "C++", "CSS", "Cassandra", "Clojure", "CoffeeScript", "D3.js", "Data Structures and Algorithms", "Django", "Docker", "Emacs", "Ember.js", "Express", "Firebase", "Git", "Grunt", "Gulp", "HTML", "HTML 5", "Hadoop", "Haskell", "Ionic", "iOS and Swift", "Java", "JavaScript", "jQuery", "LESS", "Meteor", "MongoDB", "MySQL", "Nginx", "Node.js", "PHP", "Perl", "PhoneGap", "Polymer", "Postgres", "Python", "R", "React", "Redis", "Regular Expressions", "RequireJS", "Ruby", "Ruby on Rails", "SEO", "SQL", "Sass", "Scala", "Sinatra", "Vim", "Visual Basic"]
+languages = ["AngularJS", "Backbone.js", "Bootstrap", "C", "C#", "C++", "CSS", "Cassandra", "Clojure", "CoffeeScript", "D3.js", "Algorithms", "Django", "Docker", "Emacs", "Ember.js", "Express", "Firebase", "Git", "Grunt", "Gulp", "HTML", "HTML 5", "Hadoop", "Haskell", "Ionic", "iOS and Swift", "Java", "JavaScript", "jQuery", "LESS", "Meteor", "MongoDB", "MySQL", "Nginx", "Node.js", "PHP", "Perl", "PhoneGap", "Polymer", "Postgres", "Python", "R", "React", "Redis", "Regular Expressions", "RequireJS", "Ruby", "Ruby on Rails", "SEO", "SQL", "Sass", "Scala", "Sinatra", "Vim", "Visual Basic"]
 
 languages.each do |x|
   Language.create({name: x})
