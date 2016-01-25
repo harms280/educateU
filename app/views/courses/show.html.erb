@@ -23,7 +23,7 @@
       <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @course.average_rating %>></span> <%= pluralize(@course.reviews.count, "review") %></p>
     <% end %>
     <p>Languages: <% @course.languages.each do |x| %> <%= link_to x.name, x %> &nbsp; <% end %></p>
-    <p><%= link_to "Take Course Here", @course.url, target: "_blank" %></p>
+    <p><strong><%= link_to "Take Course Here", @course.url, target: "_blank" %></strong></p>
   </div>
 </div>
 <div class="container">

@@ -4,21 +4,21 @@
 
 <div class="container">
 	<div class="row">
-	  <ul class="nav nav-tabs">
+	  <ul class="nav nav-pills">
 	  	<% if @tab_courses %>
-	    	<li class="active"><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.count %></span></a></li>
+	    	<li class="active"><a data-toggle="pill" href="#courses">Courses <span class="badge"><%= @courses.count %></span></a></li>
 	    <% else %>
-	    	<li><a data-toggle="tab" href="#courses">Courses <span class="badge"><%= @courses.count %></span></a></li>
+	    	<li><a data-toggle="pill" href="#courses">Courses <span class="badge"><%= @courses.count %></span></a></li>
 	    <% end %>
 	    <% if @tab_curriculums %>
-				<li class="active"><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.count %></span></a></li>
+				<li class="active"><a data-toggle="pill" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.count %></span></a></li>
 	    <% else %>
-	    	<li><a data-toggle="tab" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.count %></span></a></li>
+	    	<li><a data-toggle="pill" href="#curriculums">Curriculums <span class="badge"><%= @curriculums.count %></span></a></li>
 	    <% end %>
 	    <% if @tab_languages %>
-	    	<li class="active"><a data-toggle="tab" href="#languages">Subjects <span class="badge"><%= @languages.count %></span></a></li>
+	    	<li class="active"><a data-toggle="pill" href="#languages">Subjects <span class="badge"><%= @languages.count %></span></a></li>
 	    <% else %>
-	    	<li><a data-toggle="tab" href="#languages">Subjects <span class="badge"><%= @languages.count %></span></a></li>
+	    	<li><a data-toggle="pill" href="#languages">Subjects <span class="badge"><%= @languages.count %></span></a></li>
 	    <% end %>
 	  </ul>
 

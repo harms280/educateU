@@ -55,6 +55,18 @@ body {
 	min-height: 100px;
 }
 
+.thumbnail {
+	-webkit-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	-moz-box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	box-shadow: 10px 11px 29px -2px rgba(0,0,0,0.46);
+	background: url(crossword.png) repeat 0 0;
+}
+
+.profilePic {
+	max-height: 380px;
+	/*border-radius: 10%;*/
+}
+
 .language > h3 {
 	display: inline;
 	vertical-align: middle;
@@ -63,7 +75,7 @@ body {
 }
 
 .panel > h3 > a {
-	color: rgb(186, 103, 21);
+	/*color: rgb(21, 187, 21);*/
 }
 
 #search {

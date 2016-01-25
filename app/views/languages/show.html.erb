@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1><%= @language.name %> Courses</h1>
+  <h1 class="text-center"><%= @language.name %> Courses</h1>
 </div>
 <div class="container">
   <div class="row">
@@ -32,16 +32,41 @@
       <!-- Sort options and Filter Button-->
         <%= render partial: "shared/course_filters", locals: {language: @language} %>
         <!-- Course panel list -->
-        <div class="row">
-          <% if @courses.length > 0 %>
-            <% @courses.each do |x| %>
-              <div class="panel col-md-8 col-md-offset-2">
-                <%= link_to x.name, x %>
-              </div>
+        <div class="container">
+          <div class="row">
+            <% if @courses.length > 0 %>
+              <% @courses.each do |x| %>
+                <div class="panel col-md-10 col-md-offset-1">
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                      <h3 class="pull-left"><%= link_to x.name, x %> 
+                      <% if x.cost == "Free" %> 
+                        <small><span class="label label-success label-sm">Free</span></small>
+                      <% end %>
+                        <br> 
+                        <% if x.course_created %>
+                          <small>released: <%= x.course_created.strftime("%m/%d/%Y") %></small>
+                        <% else %>
+                          <small>posted: <%= time_ago_in_words(r.created_at) %></small>
+                        <% end %>
+                      </h3>
+                      <h5 class="pull-right">Average Rating: <span class="star-rating" data-score=<%= x.average_rating %>></span> <br> <small><%= pluralize(x.review_count, "Review") %></small></h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2 col-md-offset-1">
+                      <p><strong>Skill Level:</strong> <%= x.skill_level %></p>
+                    </div>
+                    <div class="col-md-8">
+                      <strong>Course Description: </strong>  <%= x.description %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <h3>No Courses Posted</h3>
             <% end %>
-          <% else %>
-            <h3>No Courses Posted</h3>
-          <% end %>
+          </div>
         </div>
       </div>
       <!-- Curriculums panel list -->
@@ -66,3 +91,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    halfShow: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

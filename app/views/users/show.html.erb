@@ -1,11 +1,21 @@
 <div class="page-header">
-  <h1>User Profile</h1>
+  <h1 class="text-center"><%= @user.username %>'s Profile</h1>
 </div>
 <div class="container">
-  <img src=<%= @user.avatar%> >
-  <p>Username: <%= @user.username %></p>
-  <p>First Name: <%= @user.first_name %></p>
-  <p>Last Name: <%= @user.last_name %></p>
-  <p>About: <%= @user.about %></p>
+	<div class="row">
+		<div class="thumbnail col-xs-8 col-xs-offset-2">
+			<img src=<%=@user.avatar %> alt="profile pic" class="profilePic img-responsive img-rounded text-center">
+
+			<p><strong>Username:</strong> <%= @user.username %></p>
+			<p><strong>First Name:</strong> <%= @user.first_name %></p>
+			<p><strong>Last Name:</strong> <%= @user.last_name %></p>
+			<p><strong>About:</strong> <%= @user.about %></p>
+			<% if current_user && @user.id == current_user.id %>
+				<%= link_to "Edit", edit_user_registration_path, class: "btn btn-info pull-left" %>
+				<%= link_to "Delete", @user, method: :delete, data: {alert: "Are you sure?"}, class: "btn btn-danger pull-right" %>
+			<% end %>
+			<br>
+		</div>
+	</div>
   
 </div>
