@@ -12,12 +12,13 @@
     </div>
   </div>
 </div>
+
 <div class="jumbotron">
   <div class="container">
     <%if @course.course_created? %>
       <p>Course created: <%= @course.course_created.strftime("%m/%d/%Y") %></p>
     <% end %>
-    <p>Cost: <%= @course.cost %></p>
+    <p>Cost: <% if @course.cost = "Free" %><span class="label label-success">Free</span> <% else %><span class="label label-warning">Paid</span> <% end %></p>
     <p>Skill Level: <%= @course.skill_level %></p>
     <% if @course.average_rating? %>
       <p>Average Rating: &nbsp; <span class="star-rating" data-score=<%= @course.average_rating %>></span> <%= pluralize(@course.reviews.count, "review") %></p>
@@ -26,6 +27,7 @@
     <p><strong><%= link_to "Take Course Here", @course.url, target: "_blank" %></strong></p>
   </div>
 </div>
+
 <div class="container">
   <div class="row">
     <%= link_to "Review Course", new_course_review_path(@course), class: 'btn btn-success' %>
@@ -36,12 +38,14 @@
         <div class="row">
           <% if r.title? || r.review_body? %>
             <% if r.title? %>
-              <h4><strong>Title:</strong> <%= r.title%> <small><%= time_ago_in_words(r.created_at) %> ago<br> by <strong><%= link_to r.user.username, r.user %></strong></small></h4>
+              <h4 class="pull-left"><strong><%= r.title%></strong> <small> by <strong><%= link_to r.user.username, r.user %></strong><br>posted <%= time_ago_in_words(r.created_at) %> ago<br> </small></h4>
             <% end %>
-            <div class="star-rating" data-score=<%= r.rating %>></div>
+            <p class="pull-right"><br>Rating: <span class="star-rating" data-score=<%= r.rating %>></span></p>
             <!-- <p><strong>Rating:</strong> <%= r.rating %></p> -->
             <% if r.review_body? %>
-              <p><strong>Review:</strong> <%= r.review_body%></p>
+              <div class="row">
+                <p class="col-md-10 col-md-offset-1"><strong>Review:</strong> <%= r.review_body%></p>
+              </div>
             <% end %>
           <% else %>
             <p><strong><%= link_to r.user.username, r.user %></strong> gave it a <div class="star-rating" data-score=<%= r.rating %>></div> <small><%= time_ago_in_words(r.created_at) %> ago</small></p>
