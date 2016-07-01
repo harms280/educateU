@@ -47,7 +47,7 @@
                         <% if x.course_created %>
                           <small>released: <%= x.course_created.strftime("%m/%d/%Y") %></small>
                         <% else %>
-                          <small>posted: <%= time_ago_in_words(r.created_at) %></small>
+                          <small>posted: <%= time_ago_in_words(x.created_at) %></small>
                         <% end %>
                       </h3>
                       <h5 class="pull-right">Average Rating: <span class="star-rating" data-score=<%= x.average_rating %>></span> <br> <small><%= pluralize(x.review_count, "Review") %></small></h5>

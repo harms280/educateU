@@ -60,7 +60,7 @@ gem 'rails_12factor', :group => :production
 
 gem 'puma'
 
-ruby "2.2.1"
+ruby "2.2.4"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
